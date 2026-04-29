@@ -1,0 +1,96 @@
+app:
+  name: driver_behavior_hybrid
+
+models:
+  yolo_path: "models/best.pt"
+
+edge:
+  source: "data/sample_videos/test.mp4"
+  conf_threshold: 0.35
+  iou_threshold: 0.45
+  save_video: true
+  output_video_path: "outputs/edge_videos/demo_output.mp4"
+  render: true
+  send_to_cloud: false
+  server_url: "http://127.0.0.1:8000"
+  source_device: "edge-01"
+  buffer_size: 150
+  alert_cooldown_sec: 4
+  show_window: false
+  resize_width: 640
+  pose_every_n_frames: 3
+  detect_every_n_frames: 2
+  # verify_on_cloud: true
+  # verify_timeout_sec: 120
+
+pose:
+  enabled: true
+  min_detection_confidence: 0.45
+  min_tracking_confidence: 0.45
+  min_visibility: 0.35
+  model_complexity: 0
+  use_brighten: true
+  gamma: 1.18
+
+rules:
+  phone_confirm_frames: 7
+  smoking_confirm_frames: 7
+  no_seatbelt_confirm_frames: 12
+
+  phone_score_threshold: 0.62
+  smoking_score_threshold: 0.62
+
+  phone_raw_conf_fallback: 0.72
+  smoking_raw_conf_fallback: 0.70
+
+  phone_hand_near_1: 1.10
+  phone_hand_near_2: 1.45
+  phone_face_near_1: 1.00
+  phone_face_near_2: 1.35
+
+  smoking_hand_near_1: 1.00
+  smoking_hand_near_2: 1.35
+  smoking_face_near_1: 0.95
+  smoking_face_near_2: 1.25
+
+  driver_roi_bonus_phone: 0.15
+  driver_roi_bonus_smoking: 0.10
+
+  phone_area_rel_min: 0.01
+  phone_area_rel_max: 0.22
+
+  smoking_area_rel_min: 0.002
+  smoking_area_rel_max: 0.10
+
+  seatbelt_conf_threshold: 0.45
+  seatbelt_margin: 0.07
+
+classes:
+  phone_names: ["phone"]
+  smoking_names: ["smoking"]
+  no_seatbelt_names: ["no-seatbelt"]
+  seatbelt_names: ["seatbelt"]
+
+storage:
+  alerts_dir: "outputs/alerts"
+  logs_dir: "outputs/logs"
+  cloud_upload_dir: "outputs/cloud_uploads"
+
+cloud:
+  upload_timeout_sec: 10
+  database_url: "sqlite:///outputs/cloud_app.db"
+
+slowfast:
+  enabled: true
+  model_name: "slowfast_r50"
+  pretrained: true
+  device: "auto" # auto | cpu | cuda
+  side_size: 256
+  crop_size: 256
+  num_frames: 32
+  sampling_rate: 2
+  frames_per_second: 30
+  alpha: 4
+  top_k: 5
+  min_project_score: 0.20
+  labels_cache_path: "models/kinetics_classnames.json"
