@@ -118,12 +118,21 @@ def update_alert_verification(
     *,
     verified: bool,
     notes: str | None = None,
+    review_status: str | None = None,
+    verified_by: str | None = None,
 ):
     obj = db.query(AlertModel).filter(AlertModel.id == alert_id).first()
     if obj is None:
         return None
 
     obj.verified = verified
+    if review_status is None:
+        review_status = "verified" if verified else "unconfirmed"
+
+    obj.review_status = review_status
+    if verified_by:
+        obj.verified_by = verified_by
+    obj.reviewed_at = datetime.utcnow()
 
     if notes:
         old_notes = obj.notes or ""
@@ -148,6 +157,15 @@ def update_alert_clip_path(
     db.commit()
     db.refresh(obj)
     return obj
+
+
+def delete_alert(db: Session, alert_id: int) -> bool:
+    obj = db.query(AlertModel).filter(AlertModel.id == alert_id).first()
+    if obj is None:
+        return False
+    db.delete(obj)
+    db.commit()
+    return True
 
 
 def get_statistics(db: Session) -> dict:

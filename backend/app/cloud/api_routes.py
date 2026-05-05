@@ -191,6 +191,8 @@ def verify_existing_alert(
         db,
         alert_id,
         verified=bool(result.get("verified", False)),
+        review_status=result.get("verification_status"),
+        verified_by="slowfast",
         notes=(
             f"pred={result.get('predicted_project_event')} "
             f"score={result.get('predicted_project_score')}"
@@ -224,6 +226,13 @@ def manual_review_alert(
         raise HTTPException(status_code=404, detail="Alert not found")
 
     return alert
+
+@router.delete("/alerts/{alert_id}")
+def delete_alert_route(alert_id: int, db: Session = Depends(get_db)):
+    success = crud.delete_alert(db, alert_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Alert not found")
+    return {"detail": "Alert deleted successfully"}
 
 @router.post("/api/verify_clip")
 def verify_uploaded_clip(

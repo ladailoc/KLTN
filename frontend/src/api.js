@@ -88,3 +88,16 @@ export async function verifyAlert(alertId) {
 
   return response.json();
 }
+
+export async function deleteAlert(alertId) {
+  const response = await fetch(`${API_BASE_URL}/alerts/${alertId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.detail || "Không thể xoá cảnh báo");
+  }
+
+  return response.json();
+}

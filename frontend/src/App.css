@@ -1316,3 +1316,79 @@ td {
     padding: 20px;
   }
 }
+
+/* Custom Select Component Styles */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.select-trigger {
+  width: 100%;
+  height: 42px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.select-trigger:hover {
+  border-color: #a0aec0;
+}
+
+.select-trigger.open {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow: hidden;
+  animation: dropdown-fade-in 0.2s ease;
+}
+
+.select-option {
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: background 0.15s ease;
+}
+
+.select-option:hover {
+  background: #f1f5f9;
+}
+
+.select-option.selected {
+  background: #e0e7ff;
+  color: var(--brand);
+  font-weight: 500;
+}
+
+@keyframes dropdown-fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Update default date input to match the aesthetic */
+input[type="date"] {
+  padding: 0 14px;
+  font-family: inherit;
+  color: var(--ink);
+}
