@@ -4,7 +4,10 @@ export function ConfidenceBar({ value }) {
   return (
     <div className="confidence-cell">
       <div className="confidence-track">
-        <div className="confidence-fill" style={{ width: `${percent}%` }} />
+        <div
+          className="confidence-fill"
+          style={{ width: `${percent}%` }}
+        />
       </div>
       <strong>{percent}%</strong>
     </div>

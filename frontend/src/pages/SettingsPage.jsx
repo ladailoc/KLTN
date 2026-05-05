@@ -1,3 +1,5 @@
+import { Settings, Cloud, Save } from "lucide-react";
+
 export function SettingsPage() {
   return (
     <div className="page">
@@ -13,7 +15,20 @@ export function SettingsPage() {
 
       <section className="settings-grid">
         <div className="panel settings-card">
-          <h2>System Preferences</h2>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+            <div style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "var(--radius-md)",
+              background: "var(--primary-light)",
+              color: "var(--primary)",
+              display: "grid",
+              placeItems: "center",
+            }}>
+              <Settings size={18} />
+            </div>
+            <h2 style={{ margin: 0, fontSize: "15px", fontWeight: 700 }}>System Preferences</h2>
+          </div>
 
           <label>
             <span>Auto Refresh</span>
@@ -43,7 +58,20 @@ export function SettingsPage() {
         </div>
 
         <div className="panel settings-card">
-          <h2>Cloud Verification</h2>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+            <div style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "var(--radius-md)",
+              background: "var(--primary-light)",
+              color: "var(--primary)",
+              display: "grid",
+              placeItems: "center",
+            }}>
+              <Cloud size={18} />
+            </div>
+            <h2 style={{ margin: 0, fontSize: "15px", fontWeight: 700 }}>Cloud Verification</h2>
+          </div>
 
           <label>
             <span>SlowFast Mode</span>
@@ -61,7 +89,9 @@ export function SettingsPage() {
             </select>
           </label>
 
-          <button className="primary-btn">Save Settings</button>
+          <button className="primary-btn" style={{ marginTop: "8px" }}>
+            <Save size={15} /> Save Settings
+          </button>
         </div>
       </section>
     </div>

@@ -31,10 +31,11 @@ export function CustomSelect({
       >
         <span>{selectedOption ? selectedOption.label : placeholder}</span>
         <ChevronDown
-          size={16}
+          size={15}
           style={{
             transform: isOpen ? "rotate(180deg)" : "none",
-            transition: "0.2s",
+            transition: "transform 0.2s ease",
+            color: "var(--muted)",
           }}
         />
       </button>

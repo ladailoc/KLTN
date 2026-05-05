@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Loader2, ShieldCheck, Video, X, Zap } from "lucide-react";
+import { Loader2, ShieldCheck, Video, X, Zap, FileJson } from "lucide-react";
 
 import { getMediaUrl } from "../../api.js";
 import { getEventMeta } from "../../constants/events.jsx";
@@ -23,11 +23,11 @@ export function EvidenceModal({
   const meta = getEventMeta(alert.event_type);
 
   return (
-    <div className="modal-backdrop">
-      <div className="alert-modal">
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="alert-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-top">
           <div>
-            <h2>Alert Details (ID #EV-{String(alert.id).padStart(3, "0")})</h2>
+            <h2>Alert Details — #EV-{String(alert.id).padStart(3, "0")}</h2>
             <div className="modal-subline">
               <span className={`modal-event-pill ${meta.className}`}>
                 {meta.label}
@@ -37,7 +37,7 @@ export function EvidenceModal({
           </div>
 
           <button className="close-btn" onClick={onClose}>
-            <X size={26} />
+            <X size={20} />
           </button>
         </div>
 
@@ -50,7 +50,7 @@ export function EvidenceModal({
                 <img src={frameUrl} alt="Evidence frame" />
               ) : (
                 <div className="no-evidence">
-                  <Video size={42} />
+                  <Video size={36} />
                   <span>No evidence available</span>
                 </div>
               )}
@@ -63,7 +63,7 @@ export function EvidenceModal({
                 target="_blank"
                 rel="noreferrer"
               >
-                View JSON Event
+                <FileJson size={14} /> View JSON Event
               </a>
             )}
 
@@ -73,9 +73,9 @@ export function EvidenceModal({
               disabled={!clipUrl || verifying}
             >
               {verifying ? (
-                <Loader2 className="spin" size={22} />
+                <Loader2 className="spin" size={20} />
               ) : (
-                <Zap size={22} />
+                <Zap size={20} />
               )}
               {verifying ? "Verifying..." : "Verify with SlowFast AI"}
             </button>
@@ -83,10 +83,12 @@ export function EvidenceModal({
 
           <div className="metadata-column">
             <div className="metadata-card">
-              <h3>TECHNICAL METADATA</h3>
+              <h3>Technical Metadata</h3>
               <div className="meta-row">
                 <span>Alert ID</span>
-                <strong>#EV-{String(alert.id).padStart(3, "0")}</strong>
+                <strong style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontSize: "12.5px" }}>
+                  #EV-{String(alert.id).padStart(3, "0")}
+                </strong>
               </div>
               <div className="meta-row">
                 <span>Source Device</span>
@@ -102,7 +104,7 @@ export function EvidenceModal({
               </div>
               <div className="meta-row">
                 <span>Status</span>
-                <strong>
+                <strong style={{ textTransform: "capitalize" }}>
                   {alert.review_status ||
                     (alert.verified ? "verified" : "pending")}
                 </strong>
@@ -110,7 +112,7 @@ export function EvidenceModal({
             </div>
 
             <div className="reviewer-card">
-              <h3>REVIEWER NOTES</h3>
+              <h3>Reviewer Notes</h3>
               <textarea
                 value={reviewerNotes}
                 onChange={(e) => setReviewerNotes(e.target.value)}
@@ -122,14 +124,14 @@ export function EvidenceModal({
 
         <div className="verification-card">
           <div className="verify-title">
-            <ShieldCheck size={22} />
+            <ShieldCheck size={20} />
             <h3>SlowFast Verification Result</h3>
           </div>
 
           {verificationResult ? (
             <div className="verify-grid">
               <div>
-                <span>STATUS</span>
+                <span>Status</span>
                 <strong
                   className={
                     verificationResult.verified
@@ -142,21 +144,21 @@ export function EvidenceModal({
               </div>
 
               <div>
-                <span>PREDICTED EVENT</span>
+                <span>Predicted Event</span>
                 <strong>
                   {verificationResult.predicted_project_event || "-"}
                 </strong>
               </div>
 
               <div>
-                <span>PREDICTED SCORE</span>
+                <span>Predicted Score</span>
                 <strong>
                   {verificationResult.predicted_project_score ?? "-"}
                 </strong>
               </div>
 
               <div>
-                <span>TOP-K LABELS</span>
+                <span>Top-K Labels</span>
                 <div className="topk-list">
                   {(verificationResult.top_k || [])
                     .slice(0, 4)
@@ -171,8 +173,7 @@ export function EvidenceModal({
             </div>
           ) : (
             <p className="verify-empty">
-              Chưa có kết quả xác thực. Có thể chạy SlowFast hoặc xác thực thủ
-              công.
+              No verification results yet. Run SlowFast or verify manually.
             </p>
           )}
         </div>

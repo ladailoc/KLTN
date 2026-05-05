@@ -20,7 +20,7 @@ export function Sidebar({ currentPage, setCurrentPage }) {
     <aside className="sidebar">
       <div className="brand">
         <div className="brand-icon">
-          <ShieldCheck size={24} />
+          <ShieldCheck size={22} />
         </div>
         <div>
           <h1>Sentinel AI</h1>
@@ -37,12 +37,25 @@ export function Sidebar({ currentPage, setCurrentPage }) {
               className={`nav-item ${currentPage === item.key ? "active" : ""}`}
               onClick={() => setCurrentPage(item.key)}
             >
-              <Icon size={22} />
+              <Icon size={18} />
               {item.label}
             </button>
           );
         })}
       </nav>
+
+      <div style={{
+        padding: "16px 22px",
+        borderTop: "1px solid var(--line-soft)",
+        fontSize: "11px",
+        color: "var(--muted)",
+        fontWeight: 500,
+      }}>
+        <div style={{ marginBottom: "2px", fontWeight: 700, color: "var(--ink)", fontSize: "12px" }}>
+          Sentinel AI v1.0
+        </div>
+        Driver Behavior Detection System
+      </div>
     </aside>
   );
 }

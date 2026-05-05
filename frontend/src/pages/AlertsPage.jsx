@@ -1,4 +1,4 @@
-import { Download, Eye, CheckSquare, Trash2 } from "lucide-react";
+import { Download, Eye, CheckSquare, Trash2, Inbox } from "lucide-react";
 import { useState } from "react";
 
 import { ConfidenceBar } from "../components/alerts/ConfidenceBar.jsx";
@@ -65,7 +65,7 @@ export function AlertsPage({
 
     if (alertIds.length === 0) {
       alert(
-        "Không có cảnh báo nào hợp lệ để xác minh trong nhóm đã chọn (cần có video clip và ở trạng thái Pending).",
+        "No valid alerts to verify in the selected group (must have video clip and be in Pending status).",
       );
       return;
     }
@@ -92,9 +92,9 @@ export function AlertsPage({
           </p>
         </div>
 
-        <div className="page-actions" style={{ display: "flex", gap: "12px" }}>
+        <div className="page-actions">
           <button className="secondary-btn" onClick={() => exportRows(alerts)}>
-            <Download size={16} />
+            <Download size={15} />
             Export CSV
           </button>
 
@@ -105,14 +105,14 @@ export function AlertsPage({
               selectedAlerts.size === 0 || isBatchVerifying || isBatchDeleting
             }
             style={{
-              color: selectedAlerts.size > 0 ? "var(--error)" : "inherit",
+              color: selectedAlerts.size > 0 ? "var(--red)" : "inherit",
               borderColor:
                 selectedAlerts.size > 0
-                  ? "rgba(239, 68, 68, 0.3)"
+                  ? "rgba(220, 38, 38, 0.25)"
                   : "var(--line)",
             }}
           >
-            <Trash2 size={16} />
+            <Trash2 size={15} />
             {isBatchDeleting
               ? "Deleting..."
               : `Delete (${selectedAlerts.size})`}
@@ -125,7 +125,7 @@ export function AlertsPage({
               selectedAlerts.size === 0 || isBatchVerifying || isBatchDeleting
             }
           >
-            <CheckSquare size={16} />
+            <CheckSquare size={15} />
             {isBatchVerifying
               ? "Verifying..."
               : `Batch Verify (${selectedAlerts.size})`}
@@ -135,7 +135,7 @@ export function AlertsPage({
 
       <section className="filter-panel">
         <label>
-          <span>EVENT TYPE</span>
+          <span>Event Type</span>
           <CustomSelect
             value={eventType}
             onChange={(val) => setEventType(val)}
@@ -149,9 +149,8 @@ export function AlertsPage({
         </label>
 
         <label>
-          <span>DEVICE ID</span>
+          <span>Device ID</span>
           <input
-            style={{ padding: "0 14px", fontSize: "14px" }}
             value={device}
             onChange={(e) => setDevice(e.target.value)}
             placeholder="All Devices"
@@ -159,7 +158,7 @@ export function AlertsPage({
         </label>
 
         <label>
-          <span>STATUS</span>
+          <span>Status</span>
           <CustomSelect
             value={verified}
             onChange={(val) => setVerified(val)}
@@ -172,7 +171,7 @@ export function AlertsPage({
         </label>
 
         <label>
-          <span>START DATE</span>
+          <span>Start Date</span>
           <CustomDatePicker
             value={startDate}
             onChange={(val) => setStartDate(val)}
@@ -181,7 +180,7 @@ export function AlertsPage({
         </label>
 
         <label>
-          <span>END DATE</span>
+          <span>End Date</span>
           <CustomDatePicker
             value={endDate}
             onChange={(val) => setEndDate(val)}
@@ -190,7 +189,7 @@ export function AlertsPage({
         </label>
 
         <label>
-          <span>ROWS</span>
+          <span>Rows</span>
           <CustomSelect
             value={limit}
             onChange={(val) => setLimit(Number(val))}
@@ -214,14 +213,14 @@ export function AlertsPage({
       <section className="table-card">
         <div className="table-card-header">
           <h2>Recent Alerts</h2>
-          <span>Total: {formatNumber(total)} records</span>
+          <span>{formatNumber(total)} records</span>
         </div>
 
         <div className="table-wrap">
           <table>
             <thead>
               <tr>
-                <th style={{ width: 40, textAlign: "center" }}>
+                <th style={{ width: 44, textAlign: "center" }}>
                   <input
                     type="checkbox"
                     disabled={
@@ -233,13 +232,13 @@ export function AlertsPage({
                     onChange={toggleAll}
                   />
                 </th>
-                <th>ALERT ID</th>
-                <th>TIMESTAMP</th>
-                <th>TYPE</th>
-                <th>CONFIDENCE</th>
-                <th>DEVICE</th>
-                <th>STATUS</th>
-                <th>ACTIONS</th>
+                <th>Alert ID</th>
+                <th>Timestamp</th>
+                <th>Type</th>
+                <th>Confidence</th>
+                <th>Device</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
 
@@ -247,7 +246,23 @@ export function AlertsPage({
               {alerts.length === 0 ? (
                 <tr>
                   <td colSpan="8" className="empty-row">
-                    No alerts found
+                    <div style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "24px 0",
+                    }}>
+                      <Inbox size={40} style={{ color: "var(--line)", strokeWidth: 1.5 }} />
+                      <div>
+                        <div style={{ fontWeight: 700, fontSize: "14px", marginBottom: "4px" }}>
+                          No alerts found
+                        </div>
+                        <div style={{ fontSize: "12px" }}>
+                          Try adjusting your filters or check back later.
+                        </div>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               ) : (
@@ -289,7 +304,7 @@ export function AlertsPage({
                           onClick={() => onOpenAlert(alert)}
                           disabled={isBatchVerifying || isBatchDeleting}
                         >
-                          <Eye size={15} /> View
+                          <Eye size={14} /> View
                         </button>
                         <button
                           className="verify-small"
@@ -313,7 +328,7 @@ export function AlertsPage({
 
         <div className="pagination">
           <span>
-            Showing page {page} of {totalPages}
+            Page {page} of {totalPages}
           </span>
           <div className="pager">
             <button

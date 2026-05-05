@@ -3,6 +3,7 @@ import {
   CalendarClock,
   ChevronRight,
   Download,
+  Plus,
   Search,
   ShieldCheck,
 } from "lucide-react";
@@ -18,6 +19,25 @@ import {
 
 import { DRIVERS, FLEET_SCORE_DATA } from "../constants/drivers.js";
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{
+      background: "var(--navy)",
+      color: "#fff",
+      padding: "8px 14px",
+      borderRadius: "var(--radius-sm)",
+      fontSize: "12px",
+      fontWeight: 600,
+      boxShadow: "var(--shadow-md)",
+      border: "none",
+    }}>
+      <div style={{ opacity: 0.7, marginBottom: "2px", fontSize: "11px" }}>{label}</div>
+      <div>Score: {payload[0].value}</div>
+    </div>
+  );
+};
+
 export function DriversPage() {
   return (
     <div className="page">
@@ -32,9 +52,11 @@ export function DriversPage() {
 
         <div className="page-actions">
           <button className="secondary-btn">
-            <Download size={16} /> Export Data
+            <Download size={15} /> Export Data
           </button>
-          <button className="primary-btn">+ Add New Driver</button>
+          <button className="primary-btn">
+            <Plus size={16} /> Add New Driver
+          </button>
         </div>
       </section>
 
@@ -61,7 +83,7 @@ export function DriversPage() {
           <span>Score Range</span>
           <div className="score-range">
             <input placeholder="0" />
-            <span>-</span>
+            <span style={{ color: "var(--muted)" }}>-</span>
             <input placeholder="100" />
           </div>
         </label>
@@ -94,12 +116,16 @@ export function DriversPage() {
                       </div>
                       <div>
                         <strong>{driver.name}</strong>
-                        <span>Active • {driver.fleet}</span>
+                        <span>Active · {driver.fleet}</span>
                       </div>
                     </div>
                   </td>
-                  <td>{driver.id}</td>
-                  <td>{driver.license}</td>
+                  <td style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontSize: "12.5px", fontWeight: 600 }}>
+                    {driver.id}
+                  </td>
+                  <td style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontSize: "12.5px" }}>
+                    {driver.license}
+                  </td>
                   <td>
                     <div className="score-cell">
                       <div className="score-track">
@@ -117,7 +143,12 @@ export function DriversPage() {
                     </span>
                   </td>
                   <td>
-                    <ChevronRight size={18} />
+                    <button
+                      className="header-icon-btn"
+                      style={{ width: "32px", height: "32px" }}
+                    >
+                      <ChevronRight size={16} />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -126,7 +157,7 @@ export function DriversPage() {
         </div>
       </section>
 
-      <section className="dashboard-grid lower">
+      <section className="dashboard-grid lower" style={{ marginTop: "20px" }}>
         <div className="panel">
           <div className="panel-title">
             <h2>Fleet Safety Overview</h2>
@@ -134,12 +165,21 @@ export function DriversPage() {
           </div>
 
           <ResponsiveContainer width="100%" height={240}>
-            <BarChart data={FLEET_SCORE_DATA}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="day" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="score" fill="#071226" radius={[8, 8, 0, 0]} />
+            <BarChart data={FLEET_SCORE_DATA} barSize={32}>
+              <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#edf0f5" />
+              <XAxis
+                dataKey="day"
+                tick={{ fontSize: 11, fill: "#6b7a90" }}
+                axisLine={{ stroke: "#edf0f5" }}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fontSize: 11, fill: "#6b7a90" }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(91, 91, 214, 0.04)" }} />
+              <Bar dataKey="score" fill="#1a2744" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

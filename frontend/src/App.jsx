@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, X } from "lucide-react";
 
 import { EvidenceModal } from "./components/alerts/EvidenceModal.jsx";
 import { Header } from "./components/layout/Header.jsx";
@@ -13,6 +13,7 @@ import { SettingsPage } from "./pages/SettingsPage.jsx";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("dashboard");
+  const [errorDismissed, setErrorDismissed] = useState(false);
   const {
     alerts,
     backendOnline,
@@ -63,10 +64,25 @@ export default function App() {
           setCurrentPage={setCurrentPage}
         />
 
-        {errorMessage && (
+        {errorMessage && !errorDismissed && (
           <div className="error-banner">
-            <AlertTriangle size={18} />
-            {errorMessage}
+            <AlertTriangle size={16} />
+            <span style={{ flex: 1 }}>{errorMessage}</span>
+            <button
+              onClick={() => setErrorDismissed(true)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                cursor: "pointer",
+                padding: "2px",
+                display: "grid",
+                placeItems: "center",
+                opacity: 0.6,
+              }}
+            >
+              <X size={14} />
+            </button>
           </div>
         )}
 

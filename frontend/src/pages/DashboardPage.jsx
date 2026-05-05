@@ -33,6 +33,25 @@ import {
 } from "../utils/dashboardData.js";
 import { formatNumber } from "../utils/formatters.js";
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{
+      background: "var(--navy)",
+      color: "#fff",
+      padding: "8px 14px",
+      borderRadius: "var(--radius-sm)",
+      fontSize: "12px",
+      fontWeight: 600,
+      boxShadow: "var(--shadow-md)",
+      border: "none",
+    }}>
+      <div style={{ opacity: 0.7, marginBottom: "2px", fontSize: "11px" }}>{label}</div>
+      <div>{payload[0].value} alerts</div>
+    </div>
+  );
+};
+
 export function DashboardPage({
   stats,
   alerts,
@@ -140,12 +159,22 @@ export function DashboardPage({
           </div>
 
           <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={trendData}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="time" tick={{ fontSize: 11 }} />
-              <YAxis allowDecimals={false} />
-              <Tooltip />
-              <Bar dataKey="alerts" fill="#dce3ee" radius={[8, 8, 0, 0]} />
+            <BarChart data={trendData} barSize={32}>
+              <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#edf0f5" />
+              <XAxis
+                dataKey="time"
+                tick={{ fontSize: 11, fill: "#6b7a90" }}
+                axisLine={{ stroke: "#edf0f5" }}
+                tickLine={false}
+              />
+              <YAxis
+                allowDecimals={false}
+                tick={{ fontSize: 11, fill: "#6b7a90" }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(91, 91, 214, 0.04)" }} />
+              <Bar dataKey="alerts" fill="#c7d2fe" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -165,12 +194,13 @@ export function DashboardPage({
                     innerRadius={60}
                     outerRadius={88}
                     paddingAngle={3}
+                    stroke="none"
                   >
                     {pieData.map((entry) => (
                       <Cell key={entry.name} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip content={<CustomTooltip />} />
                 </PieChart>
               </ResponsiveContainer>
 
@@ -182,7 +212,7 @@ export function DashboardPage({
 
             <div className="event-list">
               {pieData.length === 0 ? (
-                <p className="empty-text">No event data</p>
+                <p style={{ color: "var(--muted)", fontSize: "13px" }}>No event data</p>
               ) : (
                 pieData.map((item) => {
                   const percent =
@@ -216,12 +246,22 @@ export function DashboardPage({
             <div className="empty-box">No device statistics available</div>
           ) : (
             <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={deviceData}>
-                <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Bar dataKey="alerts" fill="#071226" radius={[8, 8, 0, 0]} />
+              <BarChart data={deviceData} barSize={40}>
+                <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#edf0f5" />
+                <XAxis
+                  dataKey="name"
+                  tick={{ fontSize: 11, fill: "#6b7a90" }}
+                  axisLine={{ stroke: "#edf0f5" }}
+                  tickLine={false}
+                />
+                <YAxis
+                  allowDecimals={false}
+                  tick={{ fontSize: 11, fill: "#6b7a90" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(91, 91, 214, 0.04)" }} />
+                <Bar dataKey="alerts" fill="#1a2744" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

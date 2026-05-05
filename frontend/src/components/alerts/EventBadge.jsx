@@ -6,7 +6,7 @@ export function EventBadge({ eventType }) {
 
   return (
     <span className={`event-badge ${meta.className}`}>
-      <Icon size={14} />
+      <Icon size={13} />
       {meta.label}
     </span>
   );

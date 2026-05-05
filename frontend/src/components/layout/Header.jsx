@@ -16,7 +16,7 @@ export function Header({
   return (
     <header className="top-header">
       <div className="global-search">
-        <Search size={18} />
+        <Search size={16} />
         <input placeholder="Search alerts, device IDs, or event types..." />
       </div>
 
@@ -25,28 +25,29 @@ export function Header({
           className="header-icon-btn"
           onClick={onRefresh}
           disabled={loading}
+          title="Refresh data"
         >
           {loading ? (
-            <Loader2 className="spin" size={18} />
+            <Loader2 className="spin" size={17} />
           ) : (
-            <RefreshCw size={18} />
+            <RefreshCw size={17} />
           )}
         </button>
 
-        <button className="header-icon-btn">
-          <Bell size={18} />
+        <button className="header-icon-btn" title="Notifications">
+          <Bell size={17} />
         </button>
 
-        <button className="header-icon-btn">
-          <HelpCircle size={18} />
+        <button className="header-icon-btn" title="Help">
+          <HelpCircle size={17} />
         </button>
 
         <div className={`backend-pill ${backendOnline ? "online" : "offline"}`}>
           <span />
-          Backend: {backendOnline ? "Online" : "Offline"}
+          {backendOnline ? "Online" : "Offline"}
         </div>
 
-        <div className="last-updated">{lastUpdated || "Not synced"}</div>
+        <span className="last-updated">{lastUpdated || "Not synced"}</span>
 
         <div className="header-divider" />
 

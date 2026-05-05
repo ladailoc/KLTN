@@ -1,4 +1,4 @@
-import { MonitorDot } from "lucide-react";
+import { MonitorDot, Plus, Wifi } from "lucide-react";
 
 export function DevicesPage({ stats, alerts }) {
   const devices = (stats?.by_device || []).map((item) => {
@@ -22,18 +22,37 @@ export function DevicesPage({ stats, alerts }) {
             Monitor Edge AI devices, camera streams, and synchronization status.
           </p>
         </div>
-        <button className="primary-btn">+ Add Device</button>
+        <button className="primary-btn">
+          <Plus size={16} /> Add Device
+        </button>
       </section>
 
       <section className="device-grid">
         {devices.length === 0 ? (
-          <div className="empty-box">No edge device data available.</div>
+          <div className="empty-box" style={{ gridColumn: "1 / -1" }}>
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "12px",
+            }}>
+              <Wifi size={40} style={{ color: "var(--line)", strokeWidth: 1.5 }} />
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontWeight: 700, fontSize: "14px", marginBottom: "4px" }}>
+                  No devices connected
+                </div>
+                <div style={{ fontSize: "12px" }}>
+                  Edge devices will appear here once they start reporting.
+                </div>
+              </div>
+            </div>
+          </div>
         ) : (
           devices.map((device) => (
             <div className="device-card" key={device.id}>
               <div className="device-card-top">
                 <div className="device-icon">
-                  <MonitorDot size={24} />
+                  <MonitorDot size={22} />
                 </div>
                 <span className="device-status online">{device.status}</span>
               </div>
