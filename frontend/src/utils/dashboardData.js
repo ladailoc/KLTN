@@ -44,21 +44,30 @@ export function buildDeviceData(stats) {
 }
 
 export function buildTrendData(alerts) {
-  const fallback = [
-    { time: "00:00", alerts: 2 },
-    { time: "03:00", alerts: 3 },
-    { time: "06:00", alerts: 6 },
-    { time: "09:00", alerts: 4 },
-    { time: "12:00", alerts: 2 },
-    { time: "15:00", alerts: 3 },
-    { time: "18:00", alerts: 5 },
-    { time: "21:00", alerts: 2 },
-  ];
+  const buckets = [];
+  const now = new Date();
 
-  if (!alerts?.length) return fallback;
+  for (let i = 7; i >= 0; i--) {
+    const hour = new Date(now.getTime() - i * 3 * 60 * 60 * 1000);
+    const label = `${String(hour.getHours()).padStart(2, "0")}:00`;
+    buckets.push({ time: label, alerts: 0, start: i });
+  }
 
-  return fallback.map((item, index) => ({
-    ...item,
-    alerts: Math.max(1, Math.round(alerts.length / 3) + (index % 3)),
-  }));
+  if (!alerts?.length) return buckets;
+
+  for (const alert of alerts) {
+    if (!alert.timestamp) continue;
+    const ts = new Date(alert.timestamp);
+    const diffMs = now.getTime() - ts.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+
+    if (diffHours < 0 || diffHours >= 24) continue;
+
+    const bucketIndex = 7 - Math.floor(diffHours / 3);
+    if (bucketIndex >= 0 && bucketIndex < 8) {
+      buckets[bucketIndex].alerts++;
+    }
+  }
+
+  return buckets.map(({ time, alerts }) => ({ time, alerts }));
 }

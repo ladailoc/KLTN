@@ -16,10 +16,12 @@ def handle_create_alert(
     notes: str | None,
     frame_file: UploadFile | None,
     clip_file: UploadFile | None,
+    roi_clip_file: UploadFile | None = None,
     event_file: UploadFile | None,
 ):
     frame_path = save_upload(frame_file, "frames")
     clip_path = save_upload(clip_file, "clips")
+    roi_clip_path = save_upload(roi_clip_file, "roi_clips")
     event_json_path = save_upload(event_file, "events")
 
     return crud.create_alert(
@@ -32,5 +34,6 @@ def handle_create_alert(
         notes=notes,
         frame_path=frame_path,
         clip_path=clip_path,
+        roi_clip_path=roi_clip_path,
         event_json_path=event_json_path,
     )

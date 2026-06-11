@@ -18,6 +18,7 @@ class AlertModel(Base):
 
     frame_path = Column(String(255), nullable=True)
     clip_path = Column(String(255), nullable=True)
+    roi_clip_path = Column(String(255), nullable=True)
     event_json_path = Column(String(255), nullable=True)
 
     verified = Column(Boolean, default=False)

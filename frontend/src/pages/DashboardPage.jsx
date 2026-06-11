@@ -55,6 +55,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 export function DashboardPage({
   stats,
   alerts,
+  recentAlerts,
   backendOnline,
   lastUpdated,
   setCurrentPage,
@@ -64,13 +65,33 @@ export function DashboardPage({
   const verifiedRate =
     total > 0 ? ((verified / total) * 100).toFixed(1) : "0.0";
 
+  const last24h = stats?.last_24h_count || 0;
+  const prev24h = stats?.prev_24h_count || 0;
+  let changeBadge = "No data";
+  if (prev24h > 0) {
+    const pct = (((last24h - prev24h) / prev24h) * 100).toFixed(0);
+    changeBadge = `${last24h - prev24h >= 0 ? "+" : ""}${pct}% vs prev 24h`;
+  } else if (last24h > 0) {
+    changeBadge = `${last24h} new in 24h`;
+  }
+
+  const rateNum = parseFloat(verifiedRate);
+  const rateBadge =
+    total === 0
+      ? "No alerts"
+      : rateNum >= 80
+        ? "High"
+        : rateNum >= 50
+          ? "Moderate"
+          : "Low";
+
   const phoneCount = getEventCount(stats, "using_phone");
   const smokingCount = getEventCount(stats, "smoking");
   const seatbeltCount = getEventCount(stats, "no_seatbelt");
 
   const pieData = buildPieData(stats);
   const deviceData = buildDeviceData(stats);
-  const trendData = buildTrendData(alerts);
+  const trendData = buildTrendData(recentAlerts);
 
   return (
     <div className="page">
@@ -93,14 +114,14 @@ export function DashboardPage({
           label="Total Alerts"
           value={formatNumber(total)}
           icon={AlertTriangle}
-          badge="+12% vs last 24h"
+          badge={changeBadge}
           colorClass="danger"
         />
         <StatCard
           label="Verified Rate"
           value={`${verifiedRate}%`}
           icon={ShieldCheck}
-          badge="Optimal"
+          badge={rateBadge}
           colorClass="purple"
         />
         <StatCard

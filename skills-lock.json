@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "slidej": {
+      "source": "H4pplness/slidej",
+      "sourceType": "github",
+      "skillPath": "skills/SKILL.md",
+      "computedHash": "8845375f39824bfb69d94640e1b423adf350701d001c76865dcdf3fbe2ce1910"
+    }
+  }
+}

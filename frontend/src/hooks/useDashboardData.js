@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   fetchAlerts,
   fetchHealth,
+  fetchRecentAlerts,
   fetchStatistics,
   manualReviewAlert,
   verifyAlert,
@@ -14,6 +15,7 @@ export function useDashboardData() {
   const [backendOnline, setBackendOnline] = useState(false);
   const [stats, setStats] = useState(null);
   const [alerts, setAlerts] = useState([]);
+  const [recentAlerts, setRecentAlerts] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -60,13 +62,15 @@ export function useDashboardData() {
           end_date: endDate ? `${endDate}T23:59:59` : "",
         };
 
-        const [statsData, alertsData] = await Promise.all([
+        const [statsData, alertsData, recentData] = await Promise.all([
           fetchStatistics(),
           fetchAlerts(params),
+          fetchRecentAlerts(24),
         ]);
 
         setStats(statsData);
         setAlerts(alertsData.items || []);
+        setRecentAlerts(recentData.items || []);
         setTotal(alertsData.total || 0);
         setTotalPages(alertsData.total_pages || 1);
         setLastUpdated(new Date().toLocaleTimeString());
@@ -220,6 +224,7 @@ export function useDashboardData() {
     loadData,
     loading,
     page,
+    recentAlerts,
     resetFilters,
     selectedAlert,
     setDevice,

@@ -49,6 +49,7 @@ def alert_to_dict(alert) -> dict:
 
     data["frame_url"] = to_public_url(alert.frame_path)
     data["clip_url"] = to_public_url(alert.clip_path)
+    data["roi_clip_url"] = to_public_url(alert.roi_clip_path)
     data["event_json_url"] = to_public_url(alert.event_json_path)
 
     return data
@@ -69,6 +70,7 @@ def create_alert(
     notes: Optional[str] = Form(None),
     frame_file: Optional[UploadFile] = File(None),
     clip_file: Optional[UploadFile] = File(None),
+    roi_clip_file: Optional[UploadFile] = File(None),
     event_file: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
 ):
@@ -82,6 +84,7 @@ def create_alert(
         notes=notes,
         frame_file=frame_file,
         clip_file=clip_file,
+        roi_clip_file=roi_clip_file,
         event_file=event_file,
     )
     return alert
@@ -174,10 +177,13 @@ def verify_existing_alert(
     if not alert:
         raise HTTPException(status_code=404, detail="Alert not found")
 
-    if not alert.clip_path:
+    # Ưu tiên dùng roi_clip_path (frame gốc crop ROI, không có overlay)
+    # Fallback về clip_path nếu chưa có roi_clip
+    verify_clip = alert.roi_clip_path or alert.clip_path
+    if not verify_clip:
         raise HTTPException(status_code=400, detail="Alert has no clip_path to verify")
 
-    clip_path = Path(alert.clip_path)
+    clip_path = Path(verify_clip)
     if not clip_path.exists():
         raise HTTPException(status_code=400, detail=f"Clip file not found: {clip_path}")
 

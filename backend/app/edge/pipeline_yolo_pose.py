@@ -152,9 +152,8 @@ class EdgePipeline:
                 t0 = time.time()
 
                 frame = self._resize_frame_if_needed(frame)
-                self.evidence_writer.push_frame(frame)
 
-                if frame_index % detect_every == 1 or not last_detections:
+                if detect_every <= 1 or frame_index % detect_every == 1 or not last_detections:
                     detections = self.detector.predict(frame, imgsz=self.cfg["edge"].get("resize_width", 640))
                     last_detections = detections
                 else:
@@ -172,13 +171,26 @@ class EdgePipeline:
                     source_device=self.cfg["edge"]["source_device"],
                 )
 
+                # Thêm alert mới vào danh sách gần nhất TRƯỚC khi render
                 for alert in alerts:
                     total_alert_count += 1
+                    recent_alerts.appendleft(alert)
+
+                # Lưu frame GỐC (không overlay) cho SlowFast verification
+                self.evidence_writer.push_original_frame(frame)
+
+                # Render frame với overlay (bbox khoanh vùng vi phạm)
+                rendered = self.renderer.draw(frame, detections, pose, recent_alerts, fps_smooth)
+
+                # Đẩy frame ĐÃ RENDER vào evidence buffer (có khoanh vùng)
+                self.evidence_writer.push_frame(rendered)
+
+                # Lưu bằng chứng & upload lên cloud
+                for alert in alerts:
                     saved = self.evidence_writer.persist_alert(alert, fps=src_fps)
                     self.logger.info(
                         f"ALERT fired: {alert.event_type} | frame={alert.frame_index} | saved={saved}"
                     )
-                    recent_alerts.appendleft(alert)
 
                     if send_to_cloud:
                         try:
@@ -211,9 +223,7 @@ class EdgePipeline:
 
                 if frame_index % 10 == 0:
                     cpu_values.append(psutil.cpu_percent(interval=None))
-                    ram_values.append(process.memory_info().rss / (1024 * 1024))    
-
-                rendered = self.renderer.draw(frame, detections, pose, recent_alerts, fps_smooth)
+                    ram_values.append(process.memory_info().rss / (1024 * 1024))
 
                 if writer is not None:
                     writer.write(rendered)

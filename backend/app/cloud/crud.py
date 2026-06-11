@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.cloud.models import AlertModel
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def manual_review_alert(
     db: Session,
@@ -49,6 +49,7 @@ def create_alert(
     notes: str | None,
     frame_path: str | None,
     clip_path: str | None,
+    roi_clip_path: str | None = None,
     event_json_path: str | None,
 ) -> AlertModel:
     obj = AlertModel(
@@ -60,6 +61,7 @@ def create_alert(
         notes=notes,
         frame_path=frame_path,
         clip_path=clip_path,
+        roi_clip_path=roi_clip_path,
         event_json_path=event_json_path,
     )
     db.add(obj)
@@ -204,10 +206,30 @@ def get_statistics(db: Session) -> dict:
         .first()
     )
 
+    now = datetime.utcnow()
+    last_24h = now - timedelta(hours=24)
+    prev_24h = last_24h - timedelta(hours=24)
+
+    last_24h_count = (
+        db.query(func.count(AlertModel.id))
+        .filter(AlertModel.created_at >= last_24h)
+        .scalar()
+        or 0
+    )
+
+    prev_24h_count = (
+        db.query(func.count(AlertModel.id))
+        .filter(AlertModel.created_at >= prev_24h, AlertModel.created_at < last_24h)
+        .scalar()
+        or 0
+    )
+
     return {
         "total_alerts": total_alerts,
         "verified_count": verified_count,
         "unverified_count": unverified_count,
+        "last_24h_count": last_24h_count,
+        "prev_24h_count": prev_24h_count,
         "by_event_type": [
             {"event_type": event_type or "unknown", "count": count}
             for event_type, count in by_event_rows

@@ -1,7 +1,6 @@
 import {
   Bell,
   Grid2X2,
-  MonitorDot,
   Settings,
   ShieldCheck,
   Users,
@@ -10,7 +9,6 @@ import {
 const NAV_ITEMS = [
   { key: "dashboard", label: "Dashboard", icon: Grid2X2 },
   { key: "alerts", label: "Alerts", icon: Bell },
-  { key: "devices", label: "Devices", icon: MonitorDot },
   { key: "drivers", label: "Drivers", icon: Users },
   { key: "settings", label: "Settings", icon: Settings },
 ];
@@ -23,7 +21,7 @@ export function Sidebar({ currentPage, setCurrentPage }) {
           <ShieldCheck size={22} />
         </div>
         <div>
-          <h1>Sentinel AI</h1>
+          <h1>Camera AI</h1>
           <p>Safety Monitoring</p>
         </div>
       </div>
@@ -52,7 +50,7 @@ export function Sidebar({ currentPage, setCurrentPage }) {
         fontWeight: 500,
       }}>
         <div style={{ marginBottom: "2px", fontWeight: 700, color: "var(--ink)", fontSize: "12px" }}>
-          Sentinel AI v1.0
+          Camera AI v1.0
         </div>
         Driver Behavior Detection System
       </div>

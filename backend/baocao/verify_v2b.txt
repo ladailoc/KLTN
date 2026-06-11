@@ -1,0 +1,44 @@
+
+=== MỞ ĐẦU (starts at para 287) ===
+Total lines: 109
+  1. Lý do chọn đề tài
+  Tai nạn giao thông hiện đang là một trong những vấn đề an sinh xã hội
+  nghiêm trọng nhất trên phạm vi toàn cầu. Theo Tổ chức Y tế Thế giới
+  (WHO), mỗi năm có khoảng 1,35 triệu người thiệt mạng vì tai nạn giao
+  thông, trong đó phần lớn nguyên nhân bắt nguồn từ yếu tố chủ quan của
+  con người như mất tập trung, sử dụng điện thoại khi lái xe, không thắt
+  dây an toàn hay buồn gật. Tại Việt Nam, tỷ lệ tai nạn giao thông liên
+  quan đến hành vi tài xế cũng chiếm tỷ trọng lớn trong tổng số các vụ
+  tai nạn xảy ra.
+  Hệ thống giám sát hành vi tài xế (Driver Monitoring System - DMS) đã
+  trở thành giải pháp công nghệ được nhiều nhà sản xuất ô tô và doanh
+  nghiệp vận tải quan tâm. Tuy nhiên, các hệ thống DMS truyền thống chủ
+  yếu dựa vào camera hành trình và cảm biến cơ học, hoạt động thụ động
+  và thiếu khả năng cảnh báo tức thời. Hơn nữa, nếu chỉ dựa vào phát
+  hiện sự hiện diện của vật thể mà không có ngữ cảnh không gian, hệ
+  ...
+  thập dữ liệu, huấn luyện mô hình, kiểm thử và đánh giá kết quả.
+  Chương 5: Kết luận và hướng phát triển. Tóm tắt kết quả, hạn
+  chế và đề xuất hướng phát triển tương lai.
+
+=== CHƯƠNG 1: TỔNG QUAN VỀ BÀI TOÁN VÀ CÔNG NGHỆ (starts at para 435) ===
+Total lines: 2016
+  Chương này trình bày bối cảnh và sự cần thiết của hệ thống giám sát hành
+  vi tài xế (DMS), các hạn chế của phương pháp truyền thống, thách thức
+  trong triển khai thực tế, cũng như giới thiệu khái niệm Edge AI và kiến
+  trúc Hybrid Edge-Cloud.
+  1.1. Tổng quan hệ thống giám sát hành vi tài xế (DMS)
+  1.1.1. Sự cần thiết của hệ thống DMS
+  Trong bối cảnh giao thông hiện đại, sự phát triển bùng nổ của hạ tầng
+  và sự gia tăng nhanh chóng của các phương tiện cơ giới đã kéo theo những
+  hệ lụy nghiêm trọng về an toàn giao thông. Theo các báo cáo thống kê từ
+  Tổ chức Y tế Thế giới (WHO) và các cơ quan quản lý an toàn giao thông
+  quốc tế, phần lớn các vụ va chạm nghiêm trọng không xuất phát từ lỗi kỹ
+  thuật của phương tiện, mà bắt nguồn từ yếu tố chủ quan của con người.
+  Trong đó, sự mất tập trung (Distracted Driving) và việc coi thường các
+  quy tắc an toàn cơ bản chiếm tỷ trọng cao nhất trong chuỗi nguyên nhân
+  trực tiếp dẫn đến tai nạn.
+  ...
+  - Đảm bảo font Times New Roman, cỡ 13, giãn dòng 1.3.
+  - Căn lề: Trái 3.5cm, Phải 2cm, Trên 3cm, Dưới 3cm.
+  - Đánh số trang ở giữa, phía dưới mỗi trang.

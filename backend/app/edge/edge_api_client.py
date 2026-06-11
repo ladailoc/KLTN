@@ -29,6 +29,8 @@ class EdgeApiClient:
                 files["frame_file"] = open(saved_paths["frame_path"], "rb")
             if saved_paths.get("clip_path"):
                 files["clip_file"] = open(saved_paths["clip_path"], "rb")
+            if saved_paths.get("roi_clip_path"):
+                files["roi_clip_file"] = open(saved_paths["roi_clip_path"], "rb")
             if saved_paths.get("event_json_path"):
                 files["event_file"] = open(saved_paths["event_json_path"], "rb")
 

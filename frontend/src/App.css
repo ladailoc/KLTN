@@ -1,5 +1,5 @@
 /* ============================================================
-   Sentinel AI — Driver Behavior Monitoring Dashboard
+   Camera AI — Driver Behavior Monitoring Dashboard
    Modern Design System v2
    ============================================================ */
 
@@ -1181,17 +1181,19 @@ tbody tr.selected-row {
 
 .pager button {
   height: 32px;
-  padding: 0 14px;
+  min-width: 32px;
+  padding: 0 10px;
   border-radius: var(--radius-sm);
   background: var(--panel-soft);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 12px;
   color: var(--ink);
   border: 1px solid var(--line);
   transition: all var(--duration-fast) var(--ease-out);
+  cursor: pointer;
 }
 
-.pager button:hover:not(:disabled) {
+.pager button:hover:not(:disabled):not(.active) {
   background: #e8ebf0;
 }
 
@@ -1200,94 +1202,18 @@ tbody tr.selected-row {
   cursor: not-allowed;
 }
 
-.pager strong {
-  font-size: 13px;
-  font-weight: 700;
-  min-width: 28px;
-  text-align: center;
+.pager button.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+  cursor: default;
 }
 
-/* ---- Device Grid ---- */
-
-.device-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.device-card {
-  background: var(--panel);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  box-shadow: var(--shadow-xs);
-  transition: all var(--duration-normal) var(--ease-out);
-}
-
-.device-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-  border-color: var(--line);
-}
-
-.device-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.device-icon {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: var(--radius-md);
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-.device-status {
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.device-status.online {
-  background: var(--green-light);
-  color: var(--green);
-}
-
-.device-card h3 {
-  margin: 16px 0 4px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.device-card p {
-  color: var(--muted);
+.pager-dots {
   font-size: 12px;
-}
-
-.device-meta {
-  border-top: 1px solid var(--line-soft);
-  padding-top: 12px;
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.device-meta span {
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.device-meta strong {
-  font-size: 13px;
-  font-weight: 700;
+  padding: 0 2px;
+  user-select: none;
 }
 
 /* ---- Input with Icon ---- */
@@ -1921,10 +1847,6 @@ input[type="date"] {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .device-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .modal-body {
     grid-template-columns: 1fr;
   }
@@ -1947,7 +1869,6 @@ input[type="date"] {
   .summary-grid.six,
   .filter-panel,
   .driver-filters,
-  .device-grid,
   .verify-grid {
     grid-template-columns: 1fr;
   }

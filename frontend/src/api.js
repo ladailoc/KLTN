@@ -35,6 +35,25 @@ export async function fetchStatistics() {
   return response.json();
 }
 
+export async function fetchRecentAlerts(hours = 24) {
+  const startDate = new Date(
+    Date.now() - hours * 60 * 60 * 1000,
+  ).toISOString();
+  const query = new URLSearchParams({
+    start_date: startDate,
+    limit: "200",
+  });
+
+  const response = await fetch(
+    `${API_BASE_URL}/api/alerts?${query.toString()}`,
+  );
+  if (!response.ok) {
+    throw new Error("Không tải được dữ liệu cảnh báo gần đây");
+  }
+
+  return response.json();
+}
+
 export async function fetchAlerts(params = {}) {
   const query = new URLSearchParams();
 

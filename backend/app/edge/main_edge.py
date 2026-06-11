@@ -8,7 +8,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="config.yaml", help="Path to config file")
     parser.add_argument("--source", default=None, help="Video file path or webcam index")
-    parser.add_argument("--send_to_cloud", action="store_true", help="Send alerts to cloud")
+    parser.add_argument("--send_to_cloud", action="store_true", default=True, help="Send alerts to cloud (default: True)")
+    parser.add_argument("--no_send_to_cloud", action="store_false", dest="send_to_cloud", help="Disable sending alerts to cloud")
     args = parser.parse_args()
 
     reset_config_cache()

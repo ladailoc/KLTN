@@ -7,7 +7,6 @@ import { Sidebar } from "./components/layout/Sidebar.jsx";
 import { useDashboardData } from "./hooks/useDashboardData.js";
 import { AlertsPage } from "./pages/AlertsPage.jsx";
 import { DashboardPage } from "./pages/DashboardPage.jsx";
-import { DevicesPage } from "./pages/DevicesPage.jsx";
 import { DriversPage } from "./pages/DriversPage.jsx";
 import { SettingsPage } from "./pages/SettingsPage.jsx";
 
@@ -32,6 +31,7 @@ export default function App() {
     loadData,
     loading,
     page,
+    recentAlerts,
     resetFilters,
     selectedAlert,
     setDevice,
@@ -90,6 +90,7 @@ export default function App() {
           <DashboardPage
             stats={stats}
             alerts={alerts}
+            recentAlerts={recentAlerts}
             backendOnline={backendOnline}
             lastUpdated={lastUpdated}
             setCurrentPage={setCurrentPage}
@@ -130,10 +131,6 @@ export default function App() {
             isBatchVerifying={isBatchVerifying}
             isBatchDeleting={isBatchDeleting}
           />
-        )}
-
-        {currentPage === "devices" && (
-          <DevicesPage stats={stats} alerts={alerts} />
         )}
 
         {currentPage === "drivers" && <DriversPage />}

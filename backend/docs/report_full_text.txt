@@ -1,0 +1,336 @@
+[10] DANH MỤC HÌNH ẢNH
+[11] DANH MỤC BẢNG BIỂU
+[12] DANH MỤC CÁC TỪ VIẾT TẮT
+[13] TÓM TẮT
+[14] MỞ ĐẦU
+[15] 1. Lý do chọn đề tài
+[16] 2. Mục tiêu nghiên cứu
+[17] 3. Ý nghĩa khoa học và thực tiễn
+[18] 4. Cấu trúc của khóa luận
+[19] CHƯƠNG 1: TỔNG QUAN VỀ BÀI TOÁN VÀ CÔNG NGHỆ
+[20] Tổng quan hệ thống giám sát hành vi tài xế (DMS)
+[21] Sự cần thiết của hệ thống DMS
+[22] Trong bối cảnh giao thông hiện đại, sự phát triển bùng nổ của hạ tầng và sự gia tăng nhanh chóng của các phương tiện cơ giới đã kéo theo những hệ lụy nghiêm trọng về an toàn giao thông. Tai nạn giao thông hiện không chỉ là bài toán về an sinh xã hội 
+[23] Nhìn nhận dưới góc độ hành vi học, sự vi phạm của người điều khiển phương tiện thường được phân ly thành hai nhóm đặc trưng. Nhóm thứ nhất là sự suy giảm nhận thức không gian và thao tác vật lý, điển hình là các hành vi rời mắt khỏi làn đường hoặc bu
+[24] Trước thực trạng cấp bách đó, việc nghiên cứu và triển khai hệ thống giám sát hành vi tài xế (Driver Monitoring System - DMS) không còn là một tính năng phụ trợ mà đã trở thành một yêu cầu công nghệ thiết yếu. Khác biệt cốt lõi của hệ thống DMS hiện 
+[25] Bên cạnh giá trị nhân văn cốt lõi là bảo vệ tính mạng con người, việc ứng dụng DMS còn mang lại lợi ích kinh tế chiến lược cho các doanh nghiệp vận tải hành khách và logistics. Nó đánh dấu bước chuyển mình từ mô hình quản lý rủi ro "thụ động" (xử lý 
+[26] Hạn chế của các phương pháp truyền thống
+[27] Trước khi các công nghệ Trí tuệ nhân tạo (AI) học sâu được ứng dụng rộng rãi, các hệ thống giám sát trên phương tiện thương mại chủ yếu dựa vào camera hành trình truyền thống (dashcam) và một số cảm biến cơ học nội bộ. Tuy nhiên, rào cản kỹ thuật lớn
+[28] Nhằm khắc phục tính bị động, một thế hệ hệ thống giám sát trung gian đã ra đời bằng cách tích hợp các thuật toán Thị giác máy tính (Computer Vision) cơ bản để giải quyết bài toán phát hiện đối tượng (Object Detection). Mặc dù có khả năng nhận diện cá
+[29] Trong môi trường vận hành thực tế, tần suất xuất hiện các báo động giả (false alarms) liên tục không chỉ gây phiền toái, làm phân tâm người lái mà còn tạo ra hội chứng "mệt mỏi vì cảnh báo" (alert fatigue). Hậu quả tất yếu là sự xói mòn lòng tin của 
+[30] Thách thức trong triển khai thực tế
+[31] Để khắc phục triệt để những khiếm khuyết của các phương pháp truyền thống, các giải pháp DMS hiện đại đã tiên phong ứng dụng công nghệ Học sâu (Deep Learning) nhằm trực tiếp phân tích hình ảnh không gian buồng lái. Tuy nhiên, việc chuyển giao các mô 
+[32] Thách thức đầu tiên và thường trực nhất đến từ sự biến thiên phức tạp của môi trường ánh sáng. Cabin xe là một không gian quang học có dải nhạy sáng (dynamic range) biến đổi liên tục và khó lường, phụ thuộc hoàn toàn vào thời gian trong ngày, điều ki
+[33] Khó khăn thứ hai xuất phát từ đặc tính động học của môi trường xe và bài toán che khuất cục bộ (partial occlusion). Sự rung lắc liên tục của phương tiện khi di chuyển trên các điều kiện địa hình khác nhau thường xuyên gây ra hiện tượng nhòe chuyển độ
+[34] Thách thức thứ ba, và cũng là rào cản lớn nhất về mặt thiết kế hệ thống, chính là giới hạn khắt khe về tài nguyên tính toán tại thiết bị đầu cuối (Edge Devices). Khác với các máy chủ đám mây sở hữu năng lực xử lý khổng lồ, phần cứng triển khai trực t
+[35] Edge AI Computing
+[36] Khái niệm Edge AI
+[37] Edge AI (Trí tuệ nhân tạo tại biên) không chỉ là một thuật ngữ hẹp mà đại diện cho một sự chuyển dịch mô hình (paradigm shift) mang tính cách mạng trong kiến trúc hệ thống phân tán. Trong mô hình điện toán đám mây truyền thống, thiết bị đầu cuối chỉ 
+[38] Hạ tầng vật lý để hiện thực hóa triết lý Edge AI chính là các thiết bị biên (Edge Devices). Trong bối cảnh hệ thống giám sát phương tiện giao thông, các thiết bị này thường là các hệ thống máy tính nhúng dạng System-on-Chip (SoC) chuyên dụng cho AI, 
+[39] Bên cạnh sự tiến hóa vượt bậc về phần cứng vi mạch, sự trưởng thành của khái niệm Edge AI còn được thúc đẩy trực tiếp bởi các kỹ thuật tối ưu hóa phần mềm chuyên sâu. Bằng việc ứng dụng các thuật toán nén mô hình (như lượng tử hóa, cắt tỉa mạng) và c
+[40] So sánh Edge AI và Cloud AI
+[41] Để nhận diện rõ giá trị chiến lược của Edge AI, cần đặt nó lên bàn cân đối chiếu với kiến trúc điện toán đám mây truyền thống (Cloud AI) trong bối cảnh vận hành khắc nghiệt của môi trường giao thông.
+[42] Trong mô hình Cloud AI thuần túy, quy trình xử lý mang tính tập trung cao độ. Camera lắp đặt trên phương tiện chỉ đóng vai trò như một thiết bị ngoại vi thu nhận tín hiệu, thực hiện đóng gói và truyền phát luồng dữ liệu video liên tục qua hạ tầng mạn
+[43] Ngược lại, mô hình Edge AI mang đến một phương thức giải quyết bài toán hoàn toàn khác biệt bằng triết lý phân tán. Thiết bị máy tính nhúng được lắp đặt trực tiếp trên xe sẽ thu nhận luồng video từ camera thông qua các giao thức truyền dẫn nội bộ với
+[44] Bên cạnh đó, Edge AI còn giải quyết triệt để bài toán chi phí viễn thông. Thay vì phải tải lên toàn bộ luồng video thô nặng nề, bộ xử lý tại biên chỉ cần trích xuất và gửi về trung tâm điều hành các siêu dữ liệu (metadata) vô cùng gọn nhẹ, bao gồm: c
+[45] Ưu điểm của Edge AI trong bài toán DMS
+[46] Việc định hướng ứng dụng triết lý Edge AI vào bài toán giám sát hành vi tài xế không phải là một sự lựa chọn ngẫu nhiên, mà xuất phát từ khả năng giải quyết trọn vẹn những điểm nghẽn kỹ thuật và vận hành mà điện toán đám mây để lại. Kiến trúc này man
+[47] Giá trị tiên quyết và quan trọng nhất là khả năng cung cấp độ trễ cực thấp (Ultra-low Latency). Trong môi trường giao thông di chuyển với tốc độ cao, ranh giới giữa an toàn và tai nạn thảm khốc thường chỉ được quyết định trong vài phần mười giây. Bằn
+[48] Thứ hai, Edge AI mang lại tính khả dụng tuyệt đối và khả năng hoạt động ngoại tuyến (Offline Mode). Hạ tầng viễn thông trên thực tế không bao giờ phủ sóng đồng đều, đặc biệt khi phương tiện di chuyển qua các địa hình phức tạp như đường đèo núi, hầm c
+[49] Thứ ba, kiến trúc tại biên giải quyết một cách tinh tế bài toán nhạy cảm về bảo vệ quyền riêng tư (Data Privacy). Một rào cản lớn khi áp dụng DMS là tâm lý phản kháng của người lao động (tài xế) do cảm giác bị "giám sát hình ảnh" 24/7. Tuy nhiên, hệ 
+[50] Cuối cùng, từ góc nhìn quản trị doanh nghiệp, Edge AI là chìa khóa then chốt để tối ưu hóa chi phí vận hành ở quy mô lớn. Nếu một doanh nghiệp logistics sở hữu một đội xe gồm hàng nghìn chiếc, việc truyền phát video liên tục theo mô hình Cloud sẽ tiê
+[51] Kiến trúc Hybrid (Edge–Cloud)
+[52] Triết lý mô hình Hybrid
+[53] Mặc dù việc dịch chuyển năng lực tính toán xuống thiết bị biên (Edge AI) mang lại lợi thế tuyệt đối về độ trễ và khả năng phản hồi thời gian thực, một kiến trúc thuần Edge (Pure Edge) vẫn bộc lộ những giới hạn cố hữu khi áp dụng vào bài toán quản trị
+[54] Triết lý cốt lõi của kiến trúc Hybrid này được định hình dựa trên nguyên tắc phân chia khối lượng công việc (workload distribution) theo mô hình phân tán bất đối xứng, được tóm gọn qua định đề: "Xử lý chiến thuật tại Biên – Quản lý chiến lược trên Đá
+[55] Tại phân hệ Biên (Edge Node), các thiết bị máy tính nhúng sẽ đóng vai trò giải quyết các bài toán "chiến thuật" mang tính sinh tử. Nhiệm vụ của Edge là tiếp nhận luồng video thô (raw video stream) trực tiếp từ camera, thực thi các thuật toán trích xu
+[56] Ngược lại, phân hệ Đám mây (Cloud Node) được giải phóng hoàn toàn khỏi gánh nặng xử lý video thô thời gian thực, qua đó có thể tập trung tài nguyên để thực thi các bài toán "chiến lược" mang tầm vóc vĩ mô. Cloud đóng vai trò là bộ não trung tâm, nơi 
+[57] Tóm lại, sự dung hợp giữa Edge và Cloud không phải là một phép cộng cơ học, mà là một sự bù trừ hoàn hảo về mặt kiến trúc. Edge mang lại tốc độ và sự bảo vệ tức thời, trong khi Cloud mang lại tính liên kết, không gian lưu trữ vô hạn và năng lực quản 
+[58] Vai trò và luồng xử lý tại Edge Node
+[59] Được định vị tại các phương tiện giao thông, phân hệ Edge đóng vai trò là một "tiền đồn cảm biến thông minh", chịu trách nhiệm thực thi toàn bộ chu trình giám sát khép kín ngay tại hiện trường. Thay vì vận hành theo các tác vụ rời rạc, thiết bị nhúng
+[60] Khởi đầu chu trình là Tầng thu nhận và tiền xử lý tín hiệu (Data Acquisition & Preprocessing). Luồng video thô từ camera giám sát cabin được hệ thống tiếp nhận qua OpenCV VideoCapture (hỗ trợ webcam, RTSP hoặc tệp video). Tuy nhiên, dữ liệu ảnh gốc t
+[61] Sau khi dữ liệu được chuẩn hóa, nó tiến thẳng vào Tầng nhận thức học sâu (Deep Learning Perception Layer). Sự khác biệt của hệ thống nằm ở việc vận hành song song và đa nhiệm các mô hình AI đã được tối ưu hóa. Ở luồng thứ nhất, mô hình nhận diện đối 
+[62] Tuy nhiên, giới hạn của học sâu là nó chỉ cung cấp dữ liệu định vị rời rạc chứ chưa hiểu được hành vi. Do đó, toàn bộ kết quả thô từ tầng nhận thức sẽ được chuyển giao cho Động cơ luật suy luận (Behavior Rules Engine) - tầng xử lý mang tính quyết địn
+[63] Kết thúc chu trình là Tầng kích hoạt và giao tiếp dữ liệu (Actuation & Communication Layer). Ngay tại mili-giây mà một vi phạm bị Động cơ luật suy luận xác nhận, Edge Node lập tức kích hoạt phần cứng ngoại vi (chuông còi, đèn LED) để đưa ra phản hồi 
+[64] Vai trò của Cloud Node
+[65] Nếu Edge Node được ví như các "tiền đồn cảm biến" giải quyết bài toán chiến thuật tại hiện trường, thì phân hệ Đám mây (Cloud Node) chính là "trung tâm thần kinh vĩ mô" giải quyết bài toán chiến lược và quản trị tổng thể. Để gánh vác khối lượng công 
+[66] Lớp nền tảng đầu tiên là Cổng giao tiếp ngoại vi (API Gateway) và Hệ thống quản trị dữ liệu. Bằng việc ứng dụng các bộ khung lập trình phía máy chủ (Backend Framework) hiện đại và tối ưu hóa hiệu năng cao cho xử lý bất đồng bộ như FastAPI, hệ thống t
+[67] Lớp thứ hai là Hệ thống giám sát và báo cáo trung tâm (Centralized Admin Dashboard). Nhằm chuyển hóa dữ liệu thô thành tri thức quản trị, Cloud Node cung cấp một ứng dụng giám sát dựa trên nền tảng Web hiện đại. Về mặt kỹ thuật, giao diện giám sát đư
+[68] Lớp thứ ba, thuộc hướng phát triển mở rộng trong tương lai, là Cơ chế quản trị vòng đời thiết bị (Device & Fleet Management). Trong phiên bản hiện tại, phân hệ Cloud mới chỉ cung cấp điểm cuối kiểm tra trạng thái cơ bản (health check endpoint) tại đư
+[69] Lợi thế và giá trị của kiến trúc Hybrid
+[70] Việc lựa chọn và thiết kế hệ thống theo định hướng kiến trúc lai Hybrid Edge-Cloud không đơn thuần là một quyết định mang tính kỹ thuật, mà là một chiến lược then chốt định định đoạt sự thành công và tính khả thi khi thương mại hóa giải pháp DMS trên
+[71] Giá trị tiên quyết và quan trọng nhất là khả năng đảm bảo tính chính xác và an toàn tuyệt đối trong vận hành. Nhờ việc đẩy toàn bộ năng lực phân tích xuống thiết bị Edge, hệ thống thiết lập được một cơ chế phản hồi thời gian thực khép kín ngay tại bu
+[72] Thứ hai, kiến trúc Hybrid cung cấp một năng lực mở rộng (Scalability) mạnh mẽ và linh hoạt. Trong kỹ thuật phần mềm, nút thắt cổ chai lớn nhất của các hệ thống AI tập trung là sự sụp đổ của máy chủ khi số lượng luồng video đầu vào tăng đột biến. Bằng
+[73] Cuối cùng, xét trên bình diện quản trị kinh tế, mô hình Hybrid là lời giải hoàn hảo cho bài toán tối ưu hóa chi phí (Cost-effectiveness) – yếu tố sống còn đối với bất kỳ doanh nghiệp vận tải nào. Thay vì phải đốt một khoản ngân sách khổng lồ để thuê/
+[75] CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ
+[78] Bài toán phát hiện đối tượng và mô hình YOLO
+[79] Tổng quan bài toán Object Detection
+[80] Phát hiện đối tượng (Object Detection) là một trong những bài toán nền tảng và có ý nghĩa thực tiễn rất lớn trong lĩnh vực Thị giác máy tính (Computer Vision). Mục tiêu của bài toán này không chỉ dừng lại ở việc xác định trong ảnh có xuất hiện đối tư
+[81] Đầu ra của một hệ thống phát hiện đối tượng thường bao gồm ba thành phần chính:
+[82] Nhãn lớp (Class label): Cho biết đối tượng thuộc loại nào, chẳng hạn như điện thoại, thuốc lá, người, hoặc dây an toàn.
+[83] Hộp giới hạn (Bounding box): Thể hiện vị trí và kích thước của đối tượng trong ảnh thông qua các tham số tọa độ không gian.
+[84] Độ tin cậy (Confidence score): Phản ánh mức độ chắc chắn của mô hình đối với dự đoán đó (thường có giá trị từ 0 đến 1).
+[85] Trong biểu diễn toán học và lập trình thông dụng, một hộp giới hạn (bounding box) được mô tả bởi bốn giá trị tọa độ là . Trong đó,  biểu diễn tọa độ tâm (hoặc tọa độ góc trên cùng bên trái) của hộp giới hạn, còn  và  tương ứng là chiều rộng (width) v
+[86] Xét về bản chất, Object Detection là bài toán phức tạp hơn nhiều so với phân loại ảnh thông thường. Trong bài toán phân loại, mô hình chỉ cần đưa ra một nhãn tổng thể cho toàn bộ bức ảnh. Tuy nhiên, đối với Object Detection, mô hình phải xử lý đồng t
+[87] Đối với hệ thống giám sát hành vi tài xế (DMS), Object Detection giữ vai trò đặc biệt quan trọng vì đây là lớp xử lý đầu tiên giúp hệ thống “nhìn thấy” các dấu hiệu trực tiếp liên quan đến hành vi vi phạm. Ví dụ, nếu mô hình không phát hiện được chiế
+[88] Bên cạnh đó, bài toán phát hiện đối tượng trong cabin xe mang những đặc thù và thách thức riêng. Thứ nhất, các đối tượng cần phát hiện thường có kích thước rất nhỏ, ví dụ như phần đầu lọc của điếu thuốc hoặc một phần nhỏ của chiếc điện thoại bị che l
+[89] Hiện nay, các phương pháp Object Detection sử dụng Deep Learning thường được chia thành hai nhóm chính là mô hình hai giai đoạn (Two-stage Detector) và mô hình một giai đoạn (One-stage Detector). Nhóm Two-stage, tiêu biểu là kiến trúc Faster R-CNN, t
+[90] Từ góc nhìn kiến trúc hệ thống, Object Detection không chỉ giúp nhận diện sự hiện diện của vật thể, mà còn tạo nền tảng dữ liệu không gian đầu vào cho các tầng xử lý ngữ cảnh cao hơn (như Pose Estimation và Behavior Rules Engine). Trong hệ thống của 
+[91] Kiến trúc mô hình YOLO
+[92] YOLO (You Only Look Once) là một họ mô hình phát hiện đối tượng thuộc nhóm mạng một giai đoạn (One-stage Detector), được đánh giá rất cao trong cộng đồng nghiên cứu thị giác máy tính nhờ khả năng tối ưu hóa sự cân bằng (trade-off) giữa độ chính xác (
+[93] Về mặt nguyên lý cốt lõi, YOLO phân hoạch ảnh đầu vào thành một lưới không gian (grid) có kích thước . Nếu tâm của một đối tượng thực tế (ground truth) rơi vào một ô lưới (grid cell) cụ thể, ô lưới đó sẽ chịu trách nhiệm chính trong việc phát hiện đố
+[95] Giá trị IoU càng cao cho thấy hộp dự đoán càng sát với hộp nhãn thực tế. Trong thực tế, các biến thể như GIoU, DIoU và CIoU thường được sử dụng nhằm cải thiện khả năng tối ưu hóa vị trí và kích thước của bounding box.
+[96] Đồng thời, mỗi ô lưới cũng dự đoán  xác suất có điều kiện của các lớp đối tượng (Conditional Class Probabilities).
+[97] Các phiên bản YOLO hiện đại đều được thiết kế dựa trên một kiến trúc module hóa vững chắc, bao gồm ba thành phần chính: Mạng xương sống (Backbone), Phần cổ mạng (Neck) và Phần đầu dự đoán (Head). Mạng xương sống thường là một mạng nơ-ron tích chập sâ
+[98] Trong quá trình huấn luyện, mô hình YOLO được tối ưu hóa thông qua một hàm mất mát đa nhiệm (Multi-task Loss Function), là sự tổng hợp của ba thành phần chính. Thành phần thứ nhất là mất mát định vị ), dùng để đánh giá sai số giữa tọa độ hộp dự đoán 
+[99] Do thiết kế cho phép nhiều ô lưới gần nhau cùng đưa ra dự đoán về một vật thể duy nhất, đầu ra của mô hình thường chứa nhiều hộp giới hạn chồng lấp. Để giải quyết vấn đề này, thuật toán Non-Maximum Suppression (NMS - Triệt tiêu cực đại phi cục bộ) đư
+[100] Trong phạm vi đề tài này, việc lựa chọn kiến trúc YOLO (ưu tiên các phiên bản có quy mô tham số từ Nano đến Medium) là một chiến lược thiết kế có chủ đích. Việc này giúp giải quyết mâu thuẫn cốt lõi: mô hình phải đủ độ sâu để phát hiện các vật thể kh
+[101] Ứng dụng YOLO trong bài toán DMS
+[102] Trong kiến trúc của hệ thống giám sát hành vi tài xế (Driver Monitoring System – DMS) được đề xuất, YOLO không được sử dụng như một bộ phân loại hành vi độc lập (Behavior Classifier), mà đóng vai trò là tầng trích xuất đặc trưng không gian sơ cấp (Pr
+[103] Đóng góp quan trọng của YOLO không nằm ở việc đưa ra kết luận cuối cùng, mà ở khả năng số hóa không gian cabin thành các thông tin tọa độ có cấu trúc, đóng vai trò là dữ liệu đầu vào cho các tầng suy luận phía sau. Điều này cho phép hệ thống chuyển t
+[104] Đối với hành vi sử dụng điện thoại, YOLO chịu trách nhiệm phát hiện và khoanh vùng (bounding box) vị trí của điện thoại trong khung hình. Tuy nhiên, sự tồn tại của điện thoại không đồng nghĩa với việc tài xế đang vi phạm, bởi thiết bị có thể nằm trên
+[105] Đối với hành vi hút thuốc, YOLO được sử dụng như một bộ lọc sơ cấp nhằm phát hiện các vùng nghi vấn (candidate regions) chứa các vật thể nhỏ như điếu thuốc. Đây là một bài toán đặc biệt thách thức do kích thước đối tượng rất nhỏ, dễ bị mất đặc trưng 
+[106] Đối với trạng thái dây an toàn, YOLO có thể được áp dụng theo hai chiến lược chính. Chiến lược thứ nhất là nhận diện trực tiếp dải dây an toàn xuất hiện trên cơ thể người lái. Cách tiếp cận này giúp mô hình bám sát đặc trưng hình ảnh cụ thể, tuy nhiê
+[107] Một yếu tố mang tính quyết định khiến YOLO trở thành lựa chọn phù hợp cho bài toán DMS là tốc độ suy luận vượt trội, đáp ứng yêu cầu xử lý thời gian thực trên các nền tảng Edge AI. Trong môi trường giao thông, hệ thống cần phân tích liên tục luồng vi
+[108] Bên cạnh đó, YOLO giữ vai trò trung tâm trong kiến trúc Hybrid Edge–Cloud của hệ thống. Tại tầng Edge, mô hình thực hiện phát hiện nhanh để xác định các tình huống đáng nghi và kích hoạt các cơ chế suy luận cục bộ. Các kết quả này sau đó có thể được 
+[109] Để YOLO phát huy tối đa hiệu quả trong môi trường cabin, việc xây dựng bộ dữ liệu huấn luyện cần được thực hiện với tiêu chuẩn cao. Dữ liệu phải phản ánh đầy đủ sự biến thiên của môi trường thực tế, bao gồm đa dạng góc đặt camera, điều kiện chiếu sán
+[110] Tóm lại, trong kiến trúc hệ thống DMS đề xuất, YOLO đóng vai trò là thành phần tiên phong trong việc quét và số hóa không gian cabin với tốc độ cao. Mặc dù đầu ra của mô hình chưa đủ để đưa ra kết luận cuối cùng về hành vi, nhưng khi được tích hợp vớ
+[111] Ước lượng tư thế và MediaPipe Pose
+[112] Tổng quan bài toán Pose Estimation
+[113] Ước lượng tư thế người (Human Pose Estimation) là một bài toán thị giác máy tính chuyên sâu, nhằm mục đích định vị và biểu diễn cấu trúc không gian của cơ thể người thông qua việc xác định tọa độ của các điểm mốc giải phẫu quan trọng (anatomical land
+[114] Sự khác biệt về bản chất này khiến Pose Estimation đóng một vai trò không thể thay thế trong hệ thống giám sát hành vi tài xế (DMS). Trong thực tế, nhiều hành vi nguy hiểm không thể được định nghĩa và kết luận chỉ thông qua sự hiện diện của một vật t
+[115] Bên cạnh khả năng cung cấp ngữ cảnh hình học, Pose Estimation còn thể hiện sự ưu việt trong việc giải quyết bài toán che khuất cục bộ (partial occlusion) vốn rất phổ biến trong môi trường buồng lái. Khi điều khiển phương tiện, một phần cơ thể của tài
+[116] Về mặt phương pháp luận, các kiến trúc học sâu giải quyết bài toán Pose Estimation thường được chia thành hai trường phái chính: tiếp cận từ trên xuống (Top-down) và tiếp cận từ dưới lên (Bottom-up). Phương pháp Top-down hoạt động theo cơ chế hai bướ
+[117] Xét trên khía cạnh xử lý chuỗi thời gian (video processing), một thách thức lớn của Pose Estimation là tính nhất quán theo thời gian (temporal consistency). Nếu các tọa độ điểm mốc dao động ngẫu nhiên (jitter) giữa các khung hình liên tiếp, các thuật
+[118] Tóm lại, trong kiến trúc của hệ thống đề xuất, Pose Estimation không tồn tại độc lập hay thay thế Object Detection, mà đóng vai trò là một tầng trích xuất ngữ cảnh hình học liền mạch. Sự giao thoa giữa dữ liệu bounding box của vật thể và dữ liệu tọa 
+[119] Framework MediaPipe Pose
+[120] MediaPipe là một bộ khung (framework) mã nguồn mở đa nền tảng do Google phát triển, chuyên biệt cho việc xây dựng các luồng xử lý dữ liệu (pipelines) đa phương tiện theo thời gian thực. Trong hệ sinh thái này, MediaPipe Pose nổi lên như một giải pháp
+[121] MediaPipe Pose cung cấp khả năng phát hiện tối đa 33 điểm mốc giải phẫu (anatomical landmarks) bao phủ toàn bộ cơ thể. Tuy nhiên, trong ngữ cảnh của hệ thống giám sát hành vi tài xế (DMS), hệ thống không khai thác toàn bộ 33 điểm mốc mà áp dụng chiến
+[122] Vượt trội hơn so với việc xử lý trên ảnh tĩnh rời rạc, MediaPipe Pose được thiết kế tối ưu cho chuỗi dữ liệu video liên tục. Framework này tích hợp sẵn các bộ lọc làm mượt động học (kinematic smoothing) nội tại nhằm tận dụng thông tin không gian từ c
+[123] Đặt trong kiến trúc tổng thể của đề tài, MediaPipe Pose được lựa chọn triển khai như một đối trọng hoàn hảo để bù đắp những khiếm khuyết của mô hình YOLO. Nếu YOLO hoàn thành xuất sắc nhiệm vụ khoanh vùng vật thể nghi vấn, thì MediaPipe Pose cung cấp
+[124] Ứng dụng MediaPipe Pose trong phân tích hành vi tài xế
+[125] Trong kiến trúc tổng thể của hệ thống giám sát hành vi tài xế, MediaPipe Pose không đóng vai trò nhận diện vật thể mà hoạt động như một tầng phân tích ngữ cảnh không gian (Spatial Context Analysis Layer), nhằm bổ trợ trực tiếp cho các kết quả trích x
+[126] Ứng dụng mang tính nền tảng đầu tiên của MediaPipe Pose trong dự án là khả năng thiết lập vùng người lái (Driver Region of Interest - Driver ROI). Dựa trên tọa độ không gian của các điểm mốc chủ chốt như mũi, tai, gốc vai và cổ tay, hệ thống có thể p
+[127] Tiếp nối luồng xử lý không gian, dữ liệu điểm mốc từ MediaPipe Pose được ứng dụng để nội suy vùng ngực (Chest ROI), phục vụ trực tiếp cho bài toán đánh giá trạng thái an toàn thụ động (thắt dây an toàn). Từ tọa độ hai vai và trục xương sống thân trên
+[128] Đối với các hành vi mất tập trung thao tác như sử dụng điện thoại, MediaPipe Pose cung cấp công cụ để đo lường tương quan khoảng cách Euclidean giữa vật thể và cơ thể người. Cụ thể, sau khi YOLO khoanh vùng được chiếc điện thoại, hệ thống sẽ tính toá
+[129] Đặc biệt trong trường hợp nhận diện hành vi hút thuốc, sự đóng góp của MediaPipe Pose mang ý nghĩa sống còn. Điếu thuốc có đặc thù là kích thước pixel cực nhỏ, rất dễ bị che khuất và hòa lẫn vào nền ảnh. Tuy nhiên, hành vi hút thuốc lại luôn gắn liền
+[130] Một giá trị cốt lõi khác của MediaPipe Pose khi triển khai trong thực tế là khả năng khắc phục hiện tượng che khuất cục bộ (partial occlusion). Trong buồng lái, các góc khuất do vô lăng hoặc do chính cánh tay người lái tạo ra là điều không thể tránh 
+[131] Cuối cùng, việc ứng dụng MediaPipe Pose là mảnh ghép hoàn hảo để vận hành Động cơ luật suy luận (Behavior Rules Engine) của hệ thống DMS. Các tọa độ điểm mốc được cập nhật theo thời gian thực chính là các biến số đầu vào lý tưởng cho các tập luật log
+[132] Nhận diện hành động (Action Recognition)
+[133] Tổng quan bài toán Action Recognition
+[134] Nhận diện hành động (Action Recognition) là một bài toán phân tích thị giác máy tính ở cấp độ cao, tập trung vào việc xác định và phân loại một hành động hoặc chuỗi hành vi diễn ra liên tục theo thời gian. Khác biệt căn bản so với các bài toán xử lý 
+[135] Sự cần thiết của việc tích hợp chiều thời gian xuất phát từ tính đa nghĩa của các khung hình tĩnh. Trong môi trường buồng lái, một hình ảnh chụp lại khoảnh khắc tài xế đưa tay lên gần mặt có thể tương ứng với vô số trạng thái khác nhau: nghe điện tho
+[136] Về mặt phương pháp luận, các kỹ thuật nhận diện hành động đã trải qua nhiều giai đoạn phát triển. Trước kỷ nguyên của học sâu, các hệ thống chủ yếu dựa vào đặc trưng thủ công kết hợp với thuật toán học máy cổ điển, tiêu biểu là việc sử dụng quang sai
+[137] Chính vì rào cản về tài nguyên phần cứng, trong khuôn khổ kiến trúc Hybrid Edge-Cloud của đề tài, mô hình Action Recognition không được triển khai thường trực trên thiết bị biên (Edge). Thay vào đó, nó được đặt tại trung tâm xử lý đám mây (Cloud Node
+[138] Mô hình SlowFast
+[139] SlowFast là một kiến trúc mạng nơ-ron sâu dành cho bài toán phân tích video, được phát triển nhằm khai thác hiệu quả đồng thời thông tin không gian và thời gian trong chuỗi khung hình. Ý tưởng trung tâm của mô hình là tách việc xử lý video thành hai 
+[140] Kiến trúc SlowFast gồm hai pathway chính:
+[141] Slow Pathway hoạt động trên chuỗi khung hình được lấy mẫu thưa hơn, tức là số frame đầu vào ít hơn trong cùng một khoảng thời gian. Mục tiêu của nhánh này là học các đặc trưng ngữ nghĩa không gian ổn định như bố cục cảnh, hình dạng vật thể, cấu trúc 
+[142] Fast Pathway hoạt động trên chuỗi khung hình dày hơn, tức là giữ được nhịp thay đổi chuyển động tốt hơn. Nhánh này tập trung vào thông tin thời gian, nghĩa là những biến đổi nhanh và tinh tế trong hành động. Mặc dù xử lý nhiều frame hơn, Fast Pathway
+[143] Hai pathway này không vận hành tách biệt hoàn toàn mà có cơ chế trao đổi thông tin thông qua các kết nối ngang (lateral connections). Nhờ đó, mô hình có thể kết hợp được cả sự ổn định của đặc trưng không gian lẫn độ nhạy với chuyển động theo thời gia
+[144] Trong bối cảnh DMS, SlowFast đặc biệt phù hợp cho các nhiệm vụ xác thực hành vi ở tầng sâu hơn. Ví dụ, một clip ngắn được trích xuất khi Edge nghi ngờ tài xế đang hút thuốc có thể được gửi đến tầng xử lý chuyên sâu để SlowFast đánh giá. Lúc này, nhán
+[145] Một lý do quan trọng khác khiến SlowFast được đánh giá cao là nó không buộc phải hy sinh toàn bộ tốc độ để đổi lấy chất lượng. So với một số mô hình 3D CNN nặng nề xử lý đồng đều mọi khung hình, SlowFast tận dụng cách chia vai trò giữa hai nhánh để t
+[146] Từ góc độ thiết kế hệ thống, việc sử dụng SlowFast như một lớp xác minh hậu kiểm là hợp lý. Edge đảm nhiệm phát hiện nhanh và cảnh báo tức thời nhờ các mô hình nhẹ. Khi phát sinh sự kiện nghi ngờ hoặc cần lưu bằng chứng chất lượng cao, hệ thống có th
+[147] Đặc trưng không gian – thời gian
+[148] Khái niệm đặc trưng không gian – thời gian là nền tảng lý thuyết quan trọng của các mô hình phân tích video. Trong xử lý ảnh tĩnh, mô hình chủ yếu trích xuất đặc trưng không gian, tức là các thông tin liên quan đến hình dạng, màu sắc, biên, kết cấu v
+[149] Có thể hình dung đơn giản như sau: đặc trưng không gian cho biết “đang có gì trong khung hình”, còn đặc trưng thời gian cho biết “nó đang thay đổi như thế nào”. Trong bài toán giám sát hành vi tài xế, một khung hình có thể cho thấy tay người lái đang
+[150] Trong các mô hình học sâu dành cho video, đặc trưng không gian – thời gian thường được học thông qua các lớp tích chập 3D hoặc các cơ chế xử lý chuỗi. Khác với tích chập 2D chỉ hoạt động trên chiều cao và chiều rộng của ảnh, tích chập 3D mở rộng thêm
+[151] Vai trò của đặc trưng không gian – thời gian đặc biệt rõ trong việc phân biệt các hành vi có bối cảnh tĩnh khá giống nhau. Ví dụ, tay đưa lên gần đầu có thể là nghe điện thoại, chỉnh tóc hoặc gãi đầu. Nếu chỉ xét hình ảnh tĩnh, các trường hợp này đôi
+[152] Trong hệ thống của đề tài, khái niệm đặc trưng không gian – thời gian có thể được hiểu như tầng thông tin sâu hơn dùng để xác thực hành vi sau khi đã có các tín hiệu sơ cấp từ YOLO và MediaPipe Pose. YOLO cung cấp thông tin về vật thể và vị trí tức t
+[153] Tóm lại, đặc trưng không gian – thời gian là cơ sở để chuyển từ phân tích ảnh đơn sang hiểu video và hành vi. Đối với các hệ thống DMS hiện đại, đây là lớp thông tin có tiềm năng rất lớn để cải thiện độ chính xác, đặc biệt trong các tình huống mà một
+[154] Tối ưu hóa mô hình cho thiết bị Edge
+[155] Quantization (Lượng tử hóa)
+[156] Một trong những rào cản kỹ thuật lớn nhất khi triển khai các mô hình mạng nơ-ron sâu trên thiết bị biên (Edge Devices) là sự hạn chế nghiêm ngặt về dung lượng bộ nhớ, băng thông, điện năng tiêu thụ và năng lực tính toán. Theo tiêu chuẩn mặc định, các
+[157] Về bản chất toán học, lượng tử hóa là quá trình ánh xạ (mapping) một dải giá trị liên tục có độ chính xác cao (như FP32) sang một tập hợp các giá trị rời rạc có độ chính xác thấp hơn (số bit ít hơn). Hai định dạng lượng tử hóa được ứng dụng phổ biến 
+[158] Xét về phương pháp luận, quy trình lượng tử hóa có thể được thực thi thông qua hai hướng tiếp cận chính. Hướng thứ nhất là Lượng tử hóa sau huấn luyện (Post-Training Quantization - PTQ). Kỹ thuật này thực hiện việc chuyển đổi kiểu dữ liệu sau khi mô 
+[159] Trong bối cảnh xây dựng hệ thống giám sát hành vi tài xế (DMS) trên các thiết bị nhúng như NVIDIA Jetson, lượng tử hóa là điều kiện kiên quyết để đạt được ngưỡng thời gian thực. Hệ thống phải gánh vác đồng thời cả mô hình YOLO và MediaPipe Pose, xử l
+[160] Tuy nhiên, lượng tử hóa luôn đi kèm với bài toán đánh đổi (trade-off) kinh điển giữa hiệu năng phần cứng và chất lượng dự đoán. Khi ép dải giá trị xuống không gian biểu diễn hẹp hơn (chỉ còn 256 giá trị đối với INT8), mô hình bắt buộc phải chịu sai s
+[161] TensorRT
+[162] TensorRT là một bộ trình biên dịch (compiler) và môi trường thực thi (runtime) hiệu năng cao dành riêng cho các mạng nơ-ron sâu, được NVIDIA nghiên cứu và phát triển để tối ưu hóa triệt để trên các kiến trúc GPU của hãng. Trong khi các framework học 
+[163] Quy trình tối ưu hóa của TensorRT thường bắt đầu bằng việc xuất mô hình đã huấn luyện sang một định dạng biểu diễn trung gian chuẩn hóa, phổ biến nhất là đồ thị ONNX (Open Neural Network Exchange). Từ đồ thị không phụ thuộc nền tảng này, trình biên d
+[164] Bên cạnh việc tái cấu trúc đồ thị, TensorRT còn tích hợp tính năng tự động tinh chỉnh nhân tính toán (Kernel Auto-tuning). Trình biên dịch sẽ tiến hành chạy thử nghiệm (benchmarking) hàng loạt các thuật toán và thư viện tối ưu phần cứng (cuDNN, cuBLA
+[165] Trong hệ thống giám sát hành vi tài xế (DMS) của đề tài, việc ứng dụng TensorRT để biên dịch mô hình YOLO và các mô hình thị giác khác là một quyết định mang tính chiến lược. Sự can thiệp của TensorRT giúp giải quyết trực tiếp bài toán sụt giảm tốc đ
+[166] Tuy nhiên, sự tối ưu hóa cực đoan của TensorRT cũng đi kèm với một số ràng buộc mang tính đặc thù. Thứ nhất, tính di động (portability) của mô hình bị loại bỏ hoàn toàn: một engine TensorRT được biên dịch trên thiết bị NVIDIA Jetson Nano sẽ không thể
+[167] Tóm lại, trong thiết kế của phân hệ Edge, nếu Lượng tử hóa là quá trình tối ưu hóa về mặt biểu diễn số học lý thuyết, thì TensorRT chính là công cụ hiện thực hóa sức mạnh tối ưu đó lên cấu trúc vi mạch vật lý. Sự kết hợp biện chứng giữa hai kỹ thuật 
+[168] Tối ưu hiệu năng trên thiết bị nhúng
+[169] Việc triển khai thành công một hệ thống AI trên thiết bị vi mạch nhúng không chỉ dừng lại ở việc tối ưu hóa nội tại mạng nơ-ron (thông qua Lượng tử hóa hay TensorRT), mà còn phụ thuộc mang tính quyết định vào kiến trúc phần mềm tổng thể. Trong thực t
+[170] Trong nguyên mẫu hiện tại, pipeline xử lý vận hành theo vòng lặp đơn (single-thread) và được tối ưu bằng cơ chế bỏ khung có chủ đích cùng kích hoạt MediaPipe Pose theo điều kiện (chỉ chạy khi có detection liên quan). Việc tách luồng I/O/AI/hiển thị b
+[171] Bên cạnh kiến trúc đa luồng, chiến lược trích mẫu thời gian (temporal sampling) hay còn gọi là bỏ khung có chủ đích (controlled frame skipping) là một thủ thuật thực tiễn mang lại hiệu quả to lớn. Thay vì ép thiết bị nhúng suy luận toàn bộ 30 khung h
+[172] Một khía cạnh kỹ thuật chuyên sâu khác là bài toán quản trị bộ nhớ vật lý. Trên các bo mạch Edge AI (như họ NVIDIA Jetson), bộ nhớ RAM được thiết kế theo kiến trúc chia sẻ thống nhất (Unified Memory Architecture) giữa CPU và GPU. Bằng cách thiết kế p
+[173] Cuối cùng, tối ưu hóa trên thiết bị Edge không chỉ là bài toán về tốc độ khung hình (FPS) cực đại, mà là bài toán về độ tin cậy và sự bền bỉ. Một hệ thống DMS vận hành trên phương tiện giao thông phải đối mặt với môi trường nhiệt độ biến thiên liên t
+[175] CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG
+[177] Kiến trúc tổng thể hệ thống
+[178] Mô hình hệ thống tổng thể
+[180] Figure 1 Kiến trúc tổng thể hệ thống
+[181] Trên cơ sở phân tích các yêu cầu thực tiễn khắt khe của bài toán giám sát hành vi tài xế (DMS), hệ thống được thiết kế dựa trên nền tảng kiến trúc phân tán Hybrid Edge–Cloud. Đây là mô hình kết hợp chặt chẽ giữa năng lực xử lý tức thời tại thiết bị b
+[182] Phân hệ Edge được triển khai trực tiếp trên các thiết bị máy tính nhúng tại phương tiện, đóng vai trò như một "tiền đồn cảm biến thông minh" có tích hợp năng lực thị giác máy tính toàn diện. Nhiệm vụ cốt lõi của phân hệ này là thu nhận liên tục luồng
+[183] Phối hợp chặt chẽ với Edge là phân hệ Cloud, được thiết kế như một hệ thống Backend trung tâm mang tính chiến lược. Vai trò chính của Cloud là tiếp nhận các gói dữ liệu cảnh báo (bao gồm siêu dữ liệu và bằng chứng hình ảnh) từ mạng lưới Edge Node gửi
+[184] Nhìn nhận ở góc độ tổng quát, kiến trúc Hybrid Edge–Cloud thể hiện sự phân công nhiệm vụ tinh tế dựa trên đúng đặc trưng tài nguyên của từng hạ tầng phần cứng. Edge gánh vác các tác vụ chiến thuật: phản ứng siêu tốc, xử lý liên tục và gắn liền với lu
+[185] Luồng dữ liệu và giao thức giao tiếp
+[187] Figure 2 Luồng xử lý cục bộ tại Edge trước khi đồng bộ lên Cloud
+[189] Figure 3 Luồng đồng bộ Edge → Cloud
+[191] Figure 4 Pipeline xử lý tại Cloud
+[193] Figure 5 Sequence diagram luồng xử lý và đồng bộ cảnh báo vi phạm
+[194] Thiết kế phân hệ Edge
+[195] Pipeline xử lý tại Edge
+[196] Để mô tả rõ hơn cơ chế vận hành của phân hệ Edge, hình bên dưới trình bày pipeline xử lý dữ liệu từ lúc tiếp nhận luồng video đầu vào cho đến khi phát sinh sự kiện vi phạm và kích hoạt các mô-đun đầu ra. Sơ đồ này thể hiện rõ vai trò điều phối của Ed
+[198] Như thể hiện trong hình trên, pipeline xử lý tại Edge được tổ chức theo dạng tuần tự từ khâu tiếp nhận dữ liệu đầu vào, suy luận mô hình, đánh giá logic hành vi cho đến khi sinh cảnh báo và lưu bằng chứng. Toàn bộ luồng xử lý này được điều phối bởi l
+[199] Ở bước đầu tiên, hệ thống tiếp nhận luồng dữ liệu hình ảnh từ nhiều nguồn khác nhau thông qua mô-đun VideoSource, bao gồm camera USB, camera IP sử dụng giao thức RTSP hoặc tệp video ngoại tuyến. Cách tổ chức này giúp pipeline có tính linh hoạt cao, d
+[200] Sau khi khung hình được đọc vào, hệ thống thực hiện bước Resize Frame để đưa ảnh đầu vào về kích thước phù hợp với cấu hình xử lý, chẳng hạn chiều rộng resize_width = 640. Việc giảm kích thước đầu vào giúp giảm số lượng điểm ảnh cần xử lý, từ đó tiết
+[201] Tiếp theo, mô-đun Frame Counter được sử dụng để điều khiển tần suất chạy của các mô hình AI. Thay vì thực hiện suy luận ở mọi khung hình, hệ thống áp dụng cơ chế lấy mẫu theo chu kỳ nhằm giảm tải tính toán. Cụ thể, mô hình YOLO Detection chỉ được chạ
+[202] Từ kết quả phát hiện đối tượng của YOLO, hệ thống thực hiện bước kiểm tra logic để xác định xem có xuất hiện các đối tượng liên quan đến hành vi vi phạm hay không, chẳng hạn như phone, smoking, seatbelt hoặc no-seatbelt. Nếu không có đối tượng liên q
+[203] Sau khi có đầu ra từ YOLO và MediaPipe Pose, dữ liệu được đưa vào BehaviorRules Engine. Đây là tầng suy luận hành vi, nơi các luật hình học và ngữ cảnh không gian được áp dụng để đánh giá xem tài xế có thực hiện hành vi vi phạm hay không. Các luật nà
+[204] Khi các điều kiện logic được thỏa mãn, hệ thống sinh ra một Violation Event. Sự kiện này là đầu ra quan trọng của pipeline tại Edge, chứa thông tin về loại vi phạm, thời điểm xảy ra và các dữ liệu liên quan phục vụ cảnh báo và lưu trữ.
+[205] Từ sự kiện vi phạm, hệ thống kích hoạt đồng thời ba mô-đun đầu ra. Thứ nhất, AlertManager chịu trách nhiệm phát cảnh báo cục bộ thông qua âm thanh, LED hoặc các tín hiệu nhắc nhở khác. Thứ hai, EvidenceWriter thực hiện lưu ảnh hoặc video clip minh ch
+[206] Thông qua cách tổ chức như trên, pipeline tại Edge không chỉ đảm bảo khả năng phát hiện hành vi vi phạm theo thời gian thực mà còn được tối ưu hóa rõ rệt về hiệu năng. Ba cơ chế tối ưu quan trọng được áp dụng gồm: hạ độ phân giải đầu vào, frame skipp
+[207] Tóm lại, pipeline xử lý tại Edge là hạt nhân vận hành của phân hệ Edge, bảo đảm hệ thống có thể tiếp nhận dữ liệu, phân tích hành vi và đưa ra phản hồi kịp thời ngay trên phương tiện. Đây là nền tảng quan trọng để hệ thống tiếp tục thực hiện các cơ c
+[209] Kết hợp YOLO và MediaPipe Pose
+[210] Trong hệ thống đề xuất, YOLO và MediaPipe Pose được kết hợp theo cơ chế suy luận hai tầng nhằm nâng cao độ chính xác trong phát hiện hành vi tài xế. YOLO đóng vai trò là tầng phát hiện nhanh các đối tượng có khả năng liên quan đến hành vi vi phạm như
+[212] Figure 6 Cơ chế kết hợp YOLO và MediaPipe Pose trong suy luận hành vi
+[213] Nguyên tắc không fallback YOLO đơn lẻ được áp dụng nghiêm ngặt cho hành vi sử dụng điện thoại: nếu không có pose hoặc không đủ landmark cần thiết thì loại bỏ. Đối với hành vi hút thuốc, hệ thống vẫn có cơ chế fallback dựa trên confidence thô khi khôn
+[214] Để một phát hiện được đưa vào quá trình suy luận hành vi, hệ thống yêu cầu phải tồn tại tối thiểu các nhóm điểm mốc cơ thể quan trọng. Cụ thể, cần có ít nhất một điểm thuộc vùng mặt, một điểm thuộc vùng vai và một điểm cổ tay. Các điểm này đóng vai t
+[215] Từ các điểm mốc thu được bởi MediaPipe Pose, hệ thống xây dựng vùng quan tâm của người lái, gọi là Driver ROI. Vùng này đại diện cho không gian cơ thể và vùng thao tác chính của tài xế trong cabin. Khi YOLO phát hiện một đối tượng, hệ thống kiểm tra 
+[216] Sau khi thỏa mãn điều kiện có đủ ngữ cảnh cơ thể và đối tượng nằm trong Driver ROI, hệ thống chuyển sang bước tính điểm vi phạm. Điểm vi phạm được xây dựng dựa trên nhiều yếu tố, bao gồm độ tin cậy của YOLO, khoảng cách giữa vật thể và cổ tay, khoảng
+[217] Về mặt nguyên lý, điểm vi phạm có thể được biểu diễn khái quát như sau:
+[219] Score = w1 × YOLO_conf
+[220] + w2 × proximity(object, wrist)
+[221] + w3 × proximity(object, face)
+[222] - w4 × size_penalty
+[223] Trong đó, YOLO_conf phản ánh độ tin cậy của mô hình phát hiện đối tượng; proximity(object, wrist) và proximity(object, face) biểu diễn mức độ gần giữa vật thể với cổ tay và vùng mặt; còn size_penalty dùng để giảm điểm đối với các bounding box có kích
+[224] Nếu điểm vi phạm vượt qua ngưỡng được thiết lập trước, ví dụ score ≥ 0.62, hệ thống xác nhận hành vi là vi phạm và sinh ra một Violation Event. Ngược lại, nếu điểm thấp hơn ngưỡng, phát hiện này chỉ được xem là nhiễu hoặc chưa đủ bằng chứng để cảnh b
+[226] Cơ chế phát hiện và cảnh báo
+[227] Thiết kế phân hệ Cloud
+[228] Kiến trúc Backend
+[230] Figure 7 Kiến trúc phân lớp của Backend Cloud
+[231] Trong phân hệ Cloud, Backend đóng vai trò là trung tâm tiếp nhận, xử lý và quản lý dữ liệu được gửi lên từ các thiết bị Edge. Sau khi phân hệ Edge phát hiện một sự kiện vi phạm, các thông tin liên quan như loại hành vi, thời gian, độ tin cậy, mã thiế
+[232] Trong hệ thống đề xuất, Backend được xây dựng bằng FastAPI, một framework Python hiện đại, phù hợp cho việc phát triển các dịch vụ REST API. FastAPI được lựa chọn vì có hiệu năng tốt, hỗ trợ xử lý bất đồng bộ, tích hợp chặt chẽ với Pydantic để kiểm t
+[233] Về mặt tổ chức mã nguồn, Backend được thiết kế theo kiến trúc phân lớp nhằm tách biệt trách nhiệm giữa các thành phần. Kiến trúc này bao gồm ba lớp chính: Router Layer, Schema Layer và Model Layer.
+[234] Router Layer chịu trách nhiệm định nghĩa các điểm cuối API của hệ thống. Đây là lớp tiếp nhận các request từ thiết bị Edge hoặc từ giao diện Dashboard. Ví dụ, khi Edge gửi dữ liệu cảnh báo lên Cloud, request được gửi tới POST /alerts (multipart/form-
+[235] Schema Layer được xây dựng dựa trên Pydantic, có vai trò kiểm tra và chuẩn hóa dữ liệu đầu vào. Các dữ liệu như nhãn vi phạm, thời gian, mã thiết bị, độ tin cậy hoặc thông tin tệp minh chứng cần được kiểm tra trước khi lưu vào hệ thống. Việc sử dụng 
+[236] Model Layer đại diện cho cấu trúc dữ liệu được lưu trữ trong cơ sở dữ liệu. Trong hệ thống, lớp này được xây dựng thông qua ORM SQLAlchemy, giúp ánh xạ các bảng dữ liệu thành các lớp đối tượng trong Python. Cách tiếp cận này giúp việc thao tác với cơ
+[237] Luồng xử lý tổng quát của Backend có thể được mô tả như sau: đầu tiên, thiết bị Edge gửi request chứa metadata và tệp minh chứng đến Router Layer. Sau đó, dữ liệu metadata được chuyển qua Schema Layer để kiểm tra tính hợp lệ. Nếu dữ liệu hợp lệ, hệ t
+[238] Kiến trúc phân lớp này mang lại nhiều lợi ích cho quá trình phát triển và bảo trì hệ thống. Thứ nhất, việc tách biệt Router, Schema và Model giúp mã nguồn rõ ràng hơn, mỗi lớp chỉ đảm nhiệm một nhóm trách nhiệm cụ thể. Thứ hai, hệ thống dễ mở rộng kh
+[240] Cơ chế nhận và xử lý dữ liệu
+[241] Sau khi phân hệ Edge phát hiện một hành vi vi phạm, hệ thống sẽ đóng gói dữ liệu cảnh báo và gửi lên Cloud thông qua API. Gói dữ liệu này bao gồm hai thành phần chính: metadata và file minh chứng. Metadata chứa các thông tin có cấu trúc như loại vi p
+[243] Figure 8 Quy trình tiếp nhận và xử lý dữ liệu cảnh báo tại Cloud.
+[244] Tại phía Cloud, request từ Edge được tiếp nhận bởi API endpoint của FastAPI. Backend tiến hành kiểm tra dữ liệu đầu vào để đảm bảo request có đầy đủ các trường bắt buộc và file minh chứng hợp lệ. Việc kiểm tra này giúp hạn chế lỗi dữ liệu, tránh ghi 
+[245] Sau khi dữ liệu được xác thực, hệ thống lưu metadata vào cơ sở dữ liệu và sử dụng khóa id tự tăng làm định danh cảnh báo. Ở phiên bản hiện tại không sinh UUID riêng cho sự kiện.
+[246] Tiếp theo, file minh chứng được lưu vào thư mục lưu trữ của Cloud theo cấu trúc phân cấp dựa trên ngày phát sinh và loại vi phạm. Ví dụ, đường dẫn lưu trữ có thể có dạng:
+[247] outputs/cloud_uploads/{frames|clips|events}/{filename}
+[248] Trong đó {frames|clips|events} là nhóm lưu trữ tương ứng, còn {filename} là tên file gốc mà Edge gửi lên (ví dụ using_phone_123.jpg hoặc using_phone_123.mp4). Cách tổ chức này phù hợp với cơ chế upload hiện tại và giúp truy vết bằng chứng theo loại d
+[249] Song song với quá trình lưu file, Backend ghi các thông tin metadata vào cơ sở dữ liệu. Các trường dữ liệu có thể bao gồm mã sự kiện, loại vi phạm, thời gian, mã thiết bị, điểm tin cậy, đường dẫn file minh chứng và trạng thái xử lý. Việc tách biệt gi
+[251] Cuối cùng, sau khi hoàn tất quá trình lưu file và ghi database, Cloud trả về response thành công cho thiết bị Edge. Response này xác nhận rằng dữ liệu cảnh báo đã được tiếp nhận và lưu trữ đầy đủ. Nhờ đó, Edge có thể đánh dấu sự kiện là đã đồng bộ th
+[252] Quy trình nhận và xử lý dữ liệu trên Cloud giúp hệ thống đảm bảo ba yêu cầu quan trọng: dữ liệu được tiếp nhận có kiểm soát, file minh chứng được lưu trữ có tổ chức, và metadata được quản lý tập trung để phục vụ tra cứu, thống kê và hiển thị trên das
+[255] Xác thực hành vi và giảm cảnh báo sai
+[256] Trong hệ thống đề xuất, phân hệ Cloud không chỉ đóng vai trò lưu trữ dữ liệu cảnh báo mà còn có thể thực hiện bước xác thực lại hành vi nhằm giảm thiểu cảnh báo sai. Cơ chế này được gọi là Cloud Verification. Khác với phân hệ Edge, vốn ưu tiên tốc độ
+[258] Figure 9 Cơ chế xác thực hành vi tại Cloud
+[259] Cơ chế xác thực trên Cloud được kích hoạt khi người dùng chủ động gọi API verify cho từng cảnh báo (endpoint POST /alerts/{id}/verify) và dịch vụ SlowFast khả dụng. Trong file config.yaml, tham số verify_on_cloud được đặt ở chế tắt (comment) theo mặc
+[260] Về mặt xử lý, video minh chứng được tách thành chuỗi frame đầu vào. Mô hình SlowFast sau đó phân tích sự thay đổi theo thời gian của tư thế, chuyển động tay, vùng mặt và sự xuất hiện của các vật thể liên quan. Kết quả đầu ra của mô hình là nhãn dự đo
+[261] Nếu kết quả xác thực từ Cloud cho thấy hành vi là hợp lệ, bản ghi cảnh báo sẽ được giữ lại và đánh dấu verified = True. Ngược lại, nếu mô hình xác định rằng cảnh báo không đủ cơ sở, hệ thống cập nhật trạng thái verified = False. Khi đó, cảnh báo có t
+[262] Việc bổ sung tầng xác thực tại Cloud tạo nên cơ chế kiểm tra hai lớp. Tầng Edge chịu trách nhiệm phát hiện nhanh và cảnh báo tức thời, trong khi tầng Cloud thực hiện hậu kiểm chuyên sâu để nâng cao độ tin cậy dữ liệu. Nhờ đó, hệ thống vừa đảm bảo yêu
+[263] Như vậy, Cloud Verification đóng vai trò như tầng kiểm chứng bổ sung sau Edge, giúp cân bằng giữa tốc độ cảnh báo thời gian thực và độ tin cậy của dữ liệu quản lý. Cơ chế này đặc biệt quan trọng trong các hệ thống DMS triển khai thực tế, nơi việc giả
+[264] Thiết kế cơ sở dữ liệu, API và giao diện giám sát
+[265] Thiết kế cơ sở dữ liệu
+[267] Bảng chính: Alerts
+[269] Giao diện giám sát (Dashboard)
+[271] CHƯƠNG 4: XÂY DỰNG VÀ THỰC NGHIỆM
+[273] Môi trường và công cụ triển khai
+[274] Quá trình hiện thực hóa, lập trình và kiểm thử nguyên mẫu (prototype) của hệ thống giám sát hành vi tài xế được tiến hành trong môi trường phát triển cục bộ (local environment) trên nền tảng hệ điều hành Windows. Việc lựa chọn môi trường Windows tron
+[275] Về mặt công nghệ cốt lõi, hệ thống là sự tích hợp của nhiều thư viện chuyên sâu được phân chia theo hai phân hệ rõ rệt. Tại phân hệ Edge (Xử lý tại biên), hệ thống sử dụng framework Ultralytics YOLO đóng vai trò hạt nhân cho các tác vụ huấn luyện và 
+[276] Tại phân hệ Cloud (Đám mây), kiến trúc dịch vụ được xây dựng dựa trên FastAPI – bộ khung phát triển API hiện đại có tốc độ phản hồi cực cao. FastAPI được kết hợp chặt chẽ với thư viện Pydantic để thực thi cơ chế chuẩn duyệt kiểu dữ liệu đầu vào (sche
+[277] Hỗ trợ cho quá trình viết mã là môi trường phát triển tích hợp (IDE) Visual Studio Code, kết hợp cùng hệ thống quản lý phiên bản Git nhằm theo dõi chặt chẽ mọi sự thay đổi trong vòng đời phát triển phần mềm (SDLC). Một điểm nhấn quan trọng trong tư d
+[278] Cuối cùng, đặc thù của các thuật toán học sâu là sự ngốn tài nguyên phần cứng. Trong môi trường thực nghiệm, hệ thống được thiết kế để tự động nhận diện và tận dụng nền tảng điện toán song song CUDA (nếu thiết bị có trang bị card đồ họa GPU NVIDIA) n
+[280] Thu thập, gán nhãn và tiền xử lý dữ liệu
+[281] Trong lĩnh vực học sâu nói chung và bài toán thị giác máy tính nói riêng, chất lượng và độ đa dạng của tập dữ liệu (dataset) đóng vai trò tiên quyết, định đoạt trực tiếp đến năng lực tổng quát hóa (generalization) của mô hình khi triển khai vào môi t
+[282] Nguồn dữ liệu đầu tiên và quan trọng nhất được trích xuất từ cuộc thi học máy danh tiếng "State Farm Distracted Driver Detection" trên nền tảng Kaggle. Đây là bộ dữ liệu chuẩn mực (benchmark dataset) cung cấp hàng chục ngàn khung hình chất lượng cao,
+[283] Sau khi tổng hợp, toàn bộ dữ liệu thô được đưa vào quy trình thiết lập bản thể học (Label Ontology). Bộ nhãn của mô hình YOLO được quy hoạch chặt chẽ thành bốn lớp đối tượng trọng tâm: phone (điện thoại di động), smoking (hành vi hoặc dấu hiệu hút th
+[284] Một thách thức lớn khi sáp nhập dữ liệu đa nguồn là sự bất đồng nhất về cách đặt tên nhãn. Chẳng hạn, cùng một khái niệm nhưng các tập dữ liệu khác nhau có thể gán nhãn là mobile phone, cell phone, phone, hoặc no_seatbelt, no-seatbelt. Nếu đưa trực t
+[285] Tiếp nối quá trình chuẩn hóa là tầng tiền xử lý quang học (Image Preprocessing). Mọi khung hình đều được thay đổi kích thước (resizing) về một định dạng ma trận tensor tiêu chuẩn (ví dụ: 640x640 pixel) để tối ưu hóa chi phí tính toán GPU. Hệ thống ti
+[286] Cuối cùng, tập dữ liệu hoàn thiện được phân rã ngẫu nhiên theo tỷ lệ tiêu chuẩn thành ba phần độc lập: Tập huấn luyện (Train set) để mạng nơ-ron cập nhật trọng số; Tập kiểm định (Validation set) để theo dõi sai số và ngăn chặn overfitting trong quá t
+[288] Huấn luyện và tối ưu mô hình
+[289] Trong kiến trúc của hệ thống, mạng YOLO đóng vai trò là "mắt thần" cốt lõi chịu trách nhiệm phát hiện đối tượng. Ở bản triển khai hiện tại, mô hình YOLO11m của Ultralytics được sử dụng thông qua trọng số best.pt (huấn luyện 100 epochs, imgsz=768, bat
+[290] Quá trình huấn luyện mạng nơ-ron được cấu hình dựa trên một không gian tham số (hyperparameters) được tinh chỉnh cẩn thận. Hình ảnh đầu vào được chuẩn hóa về ma trận vuông với tham số imgsz=768, đảm bảo đủ độ phân giải không gian để trích xuất đặc tr
+[291] Để đối phó với môi trường ánh sáng phức tạp và góc quay hẹp trong cabin xe, hệ thống áp dụng mạnh mẽ các kỹ thuật Tăng cường dữ liệu (Data Augmentation) tiên tiến. Thuật toán Mosaic ghép ngẫu nhiên 4 bức ảnh thành một, giúp mô hình học cách nhận diện
+[292] Tuy nhiên, việc có được một mô hình best.pt chính xác mới chỉ là một nửa chặng đường. Để hệ thống có thể vận hành trơn tru trên các thiết bị Edge giới hạn tài nguyên, hàng loạt các chiến lược tối ưu hóa tại thời điểm chạy (runtime optimization) đã đư
+[293] 4.3.1. Tối ưu hóa bằng chiến lược trích mẫu thời gian (Frame Skipping)
+[294] Thay vì ép vi xử lý phải gồng gánh luồng suy luận trên toàn bộ 30 khung hình mỗi giây (FPS), hệ thống áp dụng cơ chế bỏ khung có chủ đích thông qua hai siêu tham số detect_every_n_frames (dành cho YOLO) và pose_every_n_frames (dành cho MediaPipe Pose
+[295] 4.3.2. Tối ưu hóa bằng chuẩn hóa độ phân giải không gian (Input Resizing)
+[296] Chi phí tính toán của mạng tích chập tỷ lệ thuận với bình phương kích thước ảnh đầu vào. Thông qua tham số resize_width, hình ảnh từ camera được thu nhỏ có kiểm soát trước khi đi vào đường ống xử lý. Việc tinh chỉnh tham số này đòi hỏi sự đánh giá vô
+[297] 4.3.3. Biên dịch và gia tốc phần cứng với TensorRT
+[298] Đây là bước tối ưu hóa chuyên sâu nhất ở tầng vi kiến trúc phần cứng. Đối với các kịch bản triển khai trên hệ sinh thái NVIDIA (như bo mạch Jetson hoặc máy tính có GPU rời), tệp trọng số PyTorch nguyên bản (.pt) có thể được biên dịch lại thông qua sc
+[299] Tóm lại, quá trình xây dựng hệ thống AI cho thiết bị Edge là một bài toán tối ưu đa mục tiêu. Các tối ưu runtime đã hiện hữu gồm: frame skipping, chuẩn hóa độ phân giải đầu vào và kích hoạt MediaPipe Pose theo điều kiện. TensorRT hiện mới ở mức expor
+[301] Triển khai hệ thống và kiểm thử
+[302] Sau khi hoàn tất quá trình huấn luyện mạng nơ-ron và định chuẩn các siêu tham số, hệ thống bước vào giai đoạn đóng gói và triển khai thực nghiệm theo đúng kiến trúc phân tán đã thiết kế, bao gồm hai phân hệ cốt lõi: Edge và Cloud.
+[303] 4.4.1. Triển khai phân hệ Edge (Thiết bị biên)
+[304] Phân hệ Edge được hiện thực hóa thông qua hạt nhân điều phối (core orchestrator) đặt tại tệp mã nguồn app/edge/pipeline_yolo_pose.py. Đây là thành phần trung tâm chịu trách nhiệm quản lý vòng đời (lifecycle) của toàn bộ quá trình xử lý video tại thiế
+[305] Khi luồng thực thi (pipeline) bắt đầu, hệ thống thực hiện một chu trình vòng lặp liên tục và khép kín: đọc khung hình từ bộ đệm, tiền xử lý không gian (resize), và đưa qua mạng YOLO để trích xuất vật thể. Dựa trên cơ chế chu kỳ (frame skipping) đã cấ
+[306] 4.4.2. Triển khai phân hệ Cloud (Đám mây trung tâm)
+[307] Phân hệ Cloud được triển khai như một hệ sinh thái Backend hoàn chỉnh dựa trên bộ khung FastAPI, với điểm neo khởi động (entry point) nằm tại tệp app/cloud/main_cloud.py. Mã nguồn tầng máy chủ được tổ chức nghiêm ngặt theo mô hình MVC (Model-View-Con
+[308] Nhiệm vụ cốt lõi của Backend là mở các cổng giao tiếp để tiếp nhận luồng dữ liệu từ hàng loạt Edge Node gửi lên. Để giải quyết bài toán băng thông, hệ thống xử lý các yêu cầu dưới định dạng tải trọng đa phần (multipart/form-data). Metadata được gửi d
+[309] 4.4.3. Thẩm định và kiểm thử kịch bản (System Validation)
+[310] Để đảm bảo hệ thống đủ sức chống chịu trước những rủi ro của môi trường vận hành thực tế, quá trình thẩm định (validation) được tiến hành nghiêm ngặt thông qua tập dữ liệu mô phỏng tại data/sample_videos và các tình huống được cô lập tại data/test_ca
+[311] Các kịch bản kiểm thử nền tảng bao gồm: khung hình trống (không có người lái), tài xế thao tác chuẩn mực, tài xế sử dụng điện thoại, hút thuốc và không thắt dây an toàn. Tuy nhiên, điểm nhấn của quá trình kiểm thử nằm ở việc đánh giá các tình huống g
+[312] Xuyên suốt quá trình chạy kịch bản, hệ thống được giám sát chặt chẽ qua bộ ba công cụ: Nhật ký thực thi (Runtime log) giúp theo dõi tiến trình chạy và điểm số tin cậy ở mức mã nguồn; Giao diện trực quan (Video overlay) giúp kiểm chứng tính chính xác 
+[313] Đánh giá hiệu năng và kết quả
+[314] Để đo lường một cách khách quan và toàn diện năng lực của hệ thống DMS đề xuất, quá trình đánh giá thực nghiệm được triển khai dựa trên hai nhóm chỉ số đo lường (metrics) cốt lõi: Thông lượng hiệu năng xử lý (Processing Performance) và Độ chính xác t
+[315] 4.5.1. Đánh giá hiệu năng xử lý (FPS)
+[316] Trong bối cảnh triển khai trên thiết bị Edge, thông lượng hệ thống được đo lường trực tiếp thông qua chỉ số Khung hình trên giây (Frames Per Second - FPS). Trong luồng thực thi mã nguồn, FPS không được tính toán rời rạc cho từng khung hình để tránh h
+[317] Để chứng minh giá trị của các kỹ thuật tối ưu hóa đã trình bày ở phần trước, hệ thống được đặt vào môi trường kiểm thử chịu tải (stress test) với nhiều cấu hình siêu tham số khác nhau. Các biến số độc lập được đưa vào thử nghiệm bao gồm: kích hoạt đơ
+[318] Bảng 4.1. Thông lượng xử lý (FPS) trung bình theo các kịch bản cấu hình
+[319] (Lưu ý: FPS được tính theo hiệu dụng = total_frames/total_time_sec. Dữ liệu đo trên video testfalse.mp4 (848x480), 4 cấu hình chạy lần lượt với detect_every_n_frames và pose_every_n_frames như bảng; cấu hình 4 dùng resize_width=640. Các cấu hình benc
+[320] Qua phân tích số liệu, có thể thấy rõ quy luật đánh đổi tài nguyên. Khi kích hoạt thêm mô hình ước lượng tư thế MediaPipe, tải điện toán (computational load) tăng vọt khiến FPS suy giảm đáng kể so với cấu hình chỉ chạy YOLO. Tuy nhiên, nhờ cơ chế kíc
+[321] 4.5.2. Đánh giá độ chính xác thực tế
+[322] Bên cạnh thông lượng xử lý, tính chính xác của hệ thống là yếu tố quyết định mức độ tin cậy. Quá trình đánh giá được thực hiện thông qua tập dữ liệu kiểm thử (Test set) bao gồm các video được gán nhãn sự thật tham chiếu (Ground Truth) từ trước. Kết q
+[323] True Positive (TP): Hệ thống phát hiện đúng hành vi vi phạm thực tế.
+[324] False Positive (FP): Hệ thống cảnh báo sai (Báo có vi phạm nhưng thực tế không có).
+[325] False Negative (FN): Hệ thống bỏ sót (Có vi phạm nhưng không phát hiện ra).
+[326] True Negative (TN): Hệ thống im lặng chính xác khi tài xế lái xe an toàn.
+[327] Từ các tham số trên, hệ thống được đánh giá qua ba chỉ số học thuật tiêu chuẩn: Độ chuẩn xác ($Precision = \frac{TP}{TP + FP}$), Độ bao phủ ($Recall = \frac{TP}{TP + FN}$) và Điểm F1-Score (trung bình điều hòa giữa Precision và Recall).
+[328] Bảng 4.2. Hiệu suất nhận diện hành vi trên tập kiểm thử
+[329] (Lưu ý: Bảng này yêu cầu ground truth để tính TP/FP/FN. Hiện chưa có bộ số liệu gán nhãn đầy đủ cho các video kiểm thử, nên tạm để "Chưa đo" và sẽ cập nhật sau.)
+[330] 4.5.3. Phân tích các trường hợp lỗi (Error Analysis)
+[331] Việc phân tích các ca cảnh báo lỗi (False Positives) và bỏ sót (False Negatives) mang lại cái nhìn sâu sắc về giới hạn nội tại của hệ thống thị giác máy tính. Trong quá trình thực nghiệm, các lỗi phổ biến được ghi nhận phân bổ vào ba nhóm nguyên nhân
+[332] Nhiễu thị giác và tương đồng hình học: Mạng YOLO thi thoảng phát sinh nhận diện nhầm (FP) các vật thể có dạng hình hộp chữ nhật màu tối (như ví tiền, sạc dự phòng, thẻ ATM) thành điện thoại di động.
+[333] Suy thoái đặc trưng do môi trường: Trong điều kiện ngược sáng gắt hoặc đi qua hầm tối, cấu trúc quang học của khung hình bị phá vỡ khiến MediaPipe Pose mất khả năng nội suy các điểm mốc (landmarks), dẫn đến việc thuật toán luật không gian bị vô hiệu 
+[334] Biến dạng phối cảnh (Perspective Distortion): Khi góc đặt camera bị xô lệch do xe xóc nảy, hệ tọa độ bị biến dạng làm cho vùng không gian quan tâm (Driver ROI) bị dịch chuyển sai lệch, khiến thuật toán logic hiểu nhầm đồ vật của ghế phụ là của tài xế
+[335] Những trường hợp này là minh chứng rõ nét cho thấy sự phức tạp của bài toán DMS thực tế so với phân tích ảnh tĩnh. Mặc dù vậy, sự can thiệp của Động cơ luật suy luận (Behavior Rules) kết hợp tư thế người lái đã giúp hệ thống lọc bỏ thành công hàng lo
+[336] 4.5.4. Đánh giá cơ chế lưu trữ và truy vết bằng chứng
+[337] Khác biệt cốt lõi giữa một mô hình AI phòng thí nghiệm và một phần mềm doanh nghiệp (Enterprise Software) nằm ở khả năng giải trình (explainability). Trong hệ thống này, mỗi cảnh báo được sinh ra đều đi kèm với một tệp bằng chứng kỹ thuật số (ảnh hoặ
+[338] Tính pháp lý và đối soát: Cung cấp tư liệu trực quan để các nhà quản lý đội xe có thể kiểm chứng thủ công (audit) tính đúng đắn của cảnh báo trước khi áp dụng các chế tài xử phạt tài xế.
+[339] Vòng lặp phản hồi dữ liệu (Data Feedback Loop): Các hình ảnh hệ thống nhận diện sai (cả FP và FN) sẽ được trích xuất tự động và đẩy ngược về kho dữ liệu. Quá trình này giúp làm giàu tập dữ liệu huấn luyện, tập trung vào các "ca khó" (hard examples) đ
+[340] Cơ sở tinh chỉnh tham số: Thông qua việc phân tích bằng chứng, kỹ sư phát triển có cơ sở thực tế để điều chỉnh lại các ngưỡng tin cậy (Confidence Thresholds) và giới hạn tỷ lệ của hàm logic hình học sao cho tiệm cận với độ chính xác tuyệt đối.
+[341] Tóm lại, hệ thống không chỉ giải quyết thành công bài toán phát hiện vi phạm thời gian thực, mà còn thiết lập được một nền tảng truy vết minh bạch, tạo tiền đề cho quá trình tự học và tự cải thiện liên tục trong tương lai.
+[342] Thảo luận
+[343] Từ những kết quả thực nghiệm và quá trình đối sánh hiệu năng, có thể khẳng định kiến trúc phân tán Hybrid Edge–Cloud là một hệ hình (paradigm) tiếp cận hoàn toàn thiết thực và tối ưu cho bài toán giám sát hành vi tài xế. Hệ thống đã chứng minh được t
+[344] Điểm sáng công nghệ mang tính đột phá của đề tài nằm ở tư duy thiết kế tầng nhận thức (Perception Layer). Việc không dựa dẫm hoàn toàn vào mạng nơ-ron phát hiện đối tượng (Object Detection) mà kết hợp chéo với lưới giải phẫu cơ thể (MediaPipe Pose) đ
+[345] Xét trên phương diện ứng dụng thực tiễn, cơ chế lưu vết bằng chứng kỹ thuật số (digital evidence) đã nâng tầm dự án từ một nguyên mẫu AI đơn thuần thành một phần mềm quản trị cấp doanh nghiệp (Enterprise-grade software). Hệ thống không hoạt động như 
+[346] Dù đạt được những kết quả rất khả quan, hệ thống hiện tại vẫn tồn tại những rào cản kỹ thuật mang tính đặc thù của lĩnh vực Thị giác máy tính cần được nhìn nhận khách quan. Thứ nhất, độ nhạy của thuật toán MediaPipe Pose suy giảm mạnh trong điều kiện
+[347] Định hướng cho những nghiên cứu và nâng cấp ở giai đoạn tiếp theo, việc giải quyết bài toán cốt lõi về Dữ liệu (Data-centric AI) vẫn là ưu tiên hàng đầu. Mô hình cần được tái huấn luyện trên một tập dữ liệu cabin thực tế đồ sộ hơn, bao quát mọi điều 
+[349] CHƯƠNG 5: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+[351] Kết quả đạt được
+[352] Trong khuôn khổ của khóa luận tốt nghiệp, đề tài đã hoàn thành xuất sắc chu trình nghiên cứu, thiết kế, lập trình và thực nghiệm thành công Hệ thống giám sát hành vi tài xế (Driver Monitoring System – DMS) dựa trên nền tảng kiến trúc phân tán Hybrid 
+[353] Về phương diện lý luận, khóa luận đã hệ thống hóa một cách toàn diện cơ sở khoa học về các công nghệ cốt lõi trong lĩnh vực Trí tuệ nhân tạo và Thị giác máy tính hiện đại. Đề tài đã mổ xẻ chi tiết nguyên lý vận hành của mạng nơ-ron phát hiện đối tượn
+[354] Về phương diện thiết kế kiến trúc, hệ thống đã hiện thực hóa thành công mô hình phân lớp bất đối xứng với hai phân hệ tương hỗ. Phân hệ Edge hoạt động như một "tiền đồn cảm biến", gánh vác khối lượng tính toán ma trận đồ sộ để trích xuất đặc trưng và
+[355] Điểm đột phá mang tính học thuật và thực tiễn lớn nhất của phân hệ Edge là việc xây dựng thành công Cơ chế xác thực ngữ cảnh (Contextual Validation Mechanism). Thay vì phó mặc quyết định cho một mô hình phát hiện đơn lẻ, hệ thống dung hợp đầu ra của 
+[356] Để giải quyết bài toán nút thắt cổ chai về tài nguyên phần cứng trên thiết bị nhúng, hệ thống đã được tích hợp một tổ hợp các giải pháp tối ưu hóa phần mềm chuyên sâu. Bằng việc phối hợp linh hoạt kỹ thuật thu gọn không gian ảnh (Dynamic Resizing), t
+[357] Tại tầng Đám mây (Cloud), đề tài đã xây dựng một hệ sinh thái Backend vận hành trên nền tảng cơ chế I/O bất đồng bộ của FastAPI, kết hợp cùng hệ quản trị cơ sở dữ liệu SQLite và ORM SQLAlchemy. Các điểm cuối (RESTful API) cho phép tiếp nhận tải trọng
+[358] Về phương diện thực nghiệm, nguyên mẫu phần mềm đã vượt qua các bài kiểm thử ma trận kịch bản (Test Matrix) trong điều kiện mô phỏng. Từ các điều kiện chuẩn mực cho đến các góc khuất thiếu sáng hay xuất hiện vật thể giả mạo (spoofing objects), hệ thố
+[359] Hạn chế của hệ thống
+[360] Mặc dù nguyên mẫu (prototype) của hệ thống đã chứng minh được tính khả thi và đạt được những thành tựu nhất định trong điều kiện thực nghiệm, song nhìn nhận dưới lăng kính của một sản phẩm phần mềm thương mại, đề tài vẫn còn tồn tại một số giới hạn n
+[361] Hạn chế lớn nhất và trực quan nhất đến từ sự nhạy cảm của mô hình với môi trường quang học và chất lượng dữ liệu đầu vào. Trong không gian buồng lái thực tế, sự biến thiên cực đoan của bức xạ ánh sáng (như ngược sáng gắt vào ban ngày hoặc thiếu sáng 
+[362] Tiếp đó, xét về khía cạnh logic thuật toán, hạt nhân nhận thức hành vi của hệ thống (Behavior Rules Engine) hiện đang được vận hành chủ yếu dựa trên hệ thống luật tất định (Deterministic Heuristics) với các ngưỡng không gian (thresholds) được thiết l
+[363] Cuối cùng, trên bình diện kiến trúc tổng thể và triển khai vật lý, hệ thống vẫn tồn tại những khoảng trống cần được lấp đầy. Phân hệ xác thực ngữ cảnh tại Đám mây (Cloud Verification) bằng mạng nơ-ron SlowFast hiện mới dừng ở mức baseline (heuristic 
+[364] Hướng phát triển trong tương lai
+[365] Để vượt qua những rào cản kỹ thuật hiện tại và nâng tầm hệ thống từ một nguyên mẫu thực nghiệm (prototype) trở thành một giải pháp công nghệ thương mại có khả năng triển khai đại trà, nhóm tác giả đề xuất một lộ trình phát triển toàn diện bao trùm cả
+[366] Thứ nhất, về quy hoạch và làm giàu dữ liệu (Data Enrichment). Trọng tâm ưu tiên là xây dựng một kho dữ liệu (Data Lake) đa phương thức, đa miền. Hệ thống cần được thu thập thêm hàng nghìn giờ video từ nhiều dòng phương tiện thương mại khác nhau, bao 
+[367] Thứ hai, về nâng cấp lõi trí tuệ nhân tạo (AI Core Upgrade). Tầng nhận thức hình ảnh có thể được thay thế bằng các kiến trúc State-of-the-Art (SOTA) hiện đại hơn như RT-DETR để bắt kịp xu hướng End-to-End Object Detection, hoặc ứng dụng Vision Transf
+[368] Thứ ba, về mở rộng không gian giám sát hành vi sinh trắc học. Hệ thống sẽ không chỉ dừng lại ở các vi phạm cơ học (cầm điện thoại, hút thuốc) mà sẽ tiến sâu vào phân tích nhận thức của người lái. Các thuật toán chuyên sâu như Gaze Estimation (ước lượ
+[369] Thứ tư, về gia tốc phần cứng và tối ưu vi kiến trúc. Để gánh vác các thuật toán nặng nề nêu trên, hệ thống sẽ được di thực (migration) lên các nền tảng SoC công nghiệp mạnh mẽ hơn như họ NVIDIA Jetson Orin. Tại đây, quá trình lượng tử hóa mô hình (Po
+[370] Cuối cùng, về hoàn thiện hệ sinh thái Đám mây (Cloud Ecosystem) và triển khai thực địa. Phân hệ Backend sẽ được nâng cấp thành một kiến trúc phần mềm dạng dịch vụ (SaaS) hỗ trợ đa khách hàng (multi-tenant). Giao diện quản trị (Dashboard) sẽ được phát
+[373] TÀI LIỆU THAM KHẢO
+[374] PHỤ LỤC
+[377] PHỤ LỤC A: ĐẶC TẢ KỸ THUẬT API/DB
+[378] A1. API Endpoints
+[379] Static media được truy cập qua /uploads/*, map tới outputs/cloud_uploads/frames|clips|events/*.
+[380] A2. Database Schema (SQLite)
+[381] Database mặc định: sqlite:///outputs/cloud_app.db

@@ -16,6 +16,7 @@ class AlertRead(BaseModel):
     notes: Optional[str] = None
     frame_path: Optional[str] = None
     clip_path: Optional[str] = None
+    roi_clip_path: Optional[str] = None
     event_json_path: Optional[str] = None
     verified: bool
     created_at: datetime

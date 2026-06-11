@@ -11,12 +11,12 @@ edge:
   save_video: true
   output_video_path: "outputs/edge_videos/demo_output.mp4"
   render: true
-  send_to_cloud: false
+  send_to_cloud: true
   server_url: "http://127.0.0.1:8000"
   source_device: "edge-01"
   buffer_size: 150
   alert_cooldown_sec: 4
-  show_window: false
+  show_window: true
   resize_width: 640
   pose_every_n_frames: 3
   detect_every_n_frames: 2

@@ -1,0 +1,21 @@
+
+=== CHƯƠNG 1 (para 107) ===
+CHƯƠNG 1: TỔNG QUAN VỀ BÀI TOÁN VÀ CÔNG NGHỆ .......................... 6
+1.1. Tổng quan hệ thống giám sát hành vi tài xế (DMS) ................. 6
+1.1.1. Sự cần thiết của hệ thống DMS ................................ 6
+1.1.2. Hạn chế của các phương pháp truyền thống ...................... 7
+1.1.3. Thách thức trong triển khai thực tế .......................... 8
+1.2. Edge AI Computing ................................................. 9
+1.2.1. Khái niệm Edge AI ............................................ 9
+1.2.2. So sánh Edge AI và Cloud AI .................................. 10
+1.2.3. Ưu điểm của Edge AI trong bài toán DMS ....................... 11
+1.3. Kiến trúc Hybrid (Edge-Cloud) ..................................... 13
+1.3.1. Triết lý mô hình Hybrid ...................................... 13
+1.3.2. Vai trò và luồng xử lý tại Edge Node ......................... 14
+1.3.3. Vai trò của Cloud Node ........................................ 15
+1.3.4. Lợi thế và giá trị của kiến trúc Hybrid ...................... 16
+1.4. Kết luận chương .................................................. 17
+
+=== KẾT THÚC CHƯƠNG 1 ===
+
+Total paragraphs: 2899

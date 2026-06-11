@@ -1,0 +1,82 @@
+app:
+  name: driver_behavior_hybrid
+classes:
+  no_seatbelt_names:
+  - no-seatbelt
+  phone_names:
+  - phone
+  seatbelt_names:
+  - seatbelt
+  smoking_names:
+  - smoking
+cloud:
+  database_url: sqlite:///outputs/cloud_app.db
+  upload_timeout_sec: 10
+edge:
+  alert_cooldown_sec: 4
+  buffer_size: 150
+  conf_threshold: 0.35
+  detect_every_n_frames: 1
+  iou_threshold: 0.45
+  output_video_path: outputs/edge_videos/demo_output.mp4
+  pose_every_n_frames: 1
+  render: true
+  resize_width: 848
+  save_video: true
+  send_to_cloud: false
+  server_url: http://127.0.0.1:8000
+  show_window: false
+  source: data/sample_videos/testfalse.mp4
+  source_device: edge-01
+models:
+  yolo_path: models/best.pt
+pose:
+  enabled: true
+  gamma: 1.18
+  min_detection_confidence: 0.45
+  min_tracking_confidence: 0.45
+  min_visibility: 0.35
+  model_complexity: 0
+  use_brighten: true
+rules:
+  driver_roi_bonus_phone: 0.15
+  driver_roi_bonus_smoking: 0.1
+  no_seatbelt_confirm_frames: 12
+  phone_area_rel_max: 0.22
+  phone_area_rel_min: 0.01
+  phone_confirm_frames: 7
+  phone_face_near_1: 1.0
+  phone_face_near_2: 1.35
+  phone_hand_near_1: 1.1
+  phone_hand_near_2: 1.45
+  phone_raw_conf_fallback: 0.72
+  phone_score_threshold: 0.62
+  seatbelt_conf_threshold: 0.45
+  seatbelt_margin: 0.07
+  smoking_area_rel_max: 0.1
+  smoking_area_rel_min: 0.002
+  smoking_confirm_frames: 7
+  smoking_face_near_1: 0.95
+  smoking_face_near_2: 1.25
+  smoking_hand_near_1: 1.0
+  smoking_hand_near_2: 1.35
+  smoking_raw_conf_fallback: 0.7
+  smoking_score_threshold: 0.62
+slowfast:
+  alpha: 4
+  crop_size: 256
+  device: auto
+  enabled: true
+  frames_per_second: 30
+  labels_cache_path: models/kinetics_classnames.json
+  min_project_score: 0.2
+  model_name: slowfast_r50
+  num_frames: 32
+  pretrained: true
+  sampling_rate: 2
+  side_size: 256
+  top_k: 5
+storage:
+  alerts_dir: outputs/alerts
+  cloud_upload_dir: outputs/cloud_uploads
+  logs_dir: outputs/logs

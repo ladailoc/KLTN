@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(pip install *)",
+      "Bash(python -c ' *)",
+      "Bash(chcp 65001)",
+      "Bash(python -X utf8 -c ' *)",
+      "Bash(python -X utf8 -c \"from docx import Document; doc = Document\\(r'backend\\\\docs\\\\báo cáo.docx'\\); [print\\(f'[{i}][{para.style.name}] {para.text.strip\\(\\)}'\\) for i, para in enumerate\\(doc.paragraphs\\) if para.text.strip\\(\\)]\")",
+      "Bash(python -X utf8 fix_report.py)",
+      "Bash(python -c \"import os; files = os.listdir\\(r'D:\\\\QNU\\\\KLTN\\\\driver_behavior_hybrid\\\\backend\\\\docs'\\); [print\\(f'{f}'\\) for f in files]\")",
+      "Bash(python -X utf8 fix_report_v2.py)",
+      "Bash(python -X utf8 fix_report_v3.py)",
+      "Bash(python -X utf8 scripts/capture_roi_demo.py)",
+      "Bash(python -X utf8 scripts/capture_roi_on_image.py)",
+      "Bash(python -c \"import pptx; print\\(pptx.__version__\\)\")"
     ]
   }
 }

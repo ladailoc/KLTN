@@ -328,7 +328,7 @@ export function AlertsPage({
 
         <div className="pagination">
           <span>
-            Page {page} of {totalPages}
+            Page {page} of {totalPages} ({formatNumber(total)} records)
           </span>
           <div className="pager">
             <button
@@ -337,7 +337,52 @@ export function AlertsPage({
             >
               Previous
             </button>
-            <strong>{page}</strong>
+
+            {(() => {
+              const pages = [];
+              let start = Math.max(1, page - 2);
+              let end = Math.min(totalPages, start + 4);
+              if (end - start < 4) {
+                start = Math.max(1, end - 4);
+              }
+
+              if (start > 1) {
+                pages.push(
+                  <button key={1} onClick={() => setPage(1)}>
+                    1
+                  </button>,
+                );
+                if (start > 2) {
+                  pages.push(<span key="dots-start" className="pager-dots">...</span>);
+                }
+              }
+
+              for (let i = start; i <= end; i++) {
+                pages.push(
+                  <button
+                    key={i}
+                    className={i === page ? "active" : ""}
+                    onClick={() => setPage(i)}
+                  >
+                    {i}
+                  </button>,
+                );
+              }
+
+              if (end < totalPages) {
+                if (end < totalPages - 1) {
+                  pages.push(<span key="dots-end" className="pager-dots">...</span>);
+                }
+                pages.push(
+                  <button key={totalPages} onClick={() => setPage(totalPages)}>
+                    {totalPages}
+                  </button>,
+                );
+              }
+
+              return pages;
+            })()}
+
             <button
               onClick={() => setPage(Math.min(totalPages, page + 1))}
               disabled={page >= totalPages}
