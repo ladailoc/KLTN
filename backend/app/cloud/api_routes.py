@@ -49,6 +49,7 @@ def alert_to_dict(alert) -> dict:
 
     data["frame_url"] = to_public_url(alert.frame_path)
     data["clip_url"] = to_public_url(alert.clip_path)
+    data["raw_clip_url"] = to_public_url(alert.raw_clip_path)
     data["roi_clip_url"] = to_public_url(alert.roi_clip_path)
     data["event_json_url"] = to_public_url(alert.event_json_path)
 
@@ -70,6 +71,7 @@ def create_alert(
     notes: Optional[str] = Form(None),
     frame_file: Optional[UploadFile] = File(None),
     clip_file: Optional[UploadFile] = File(None),
+    raw_clip_file: Optional[UploadFile] = File(None),
     roi_clip_file: Optional[UploadFile] = File(None),
     event_file: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
@@ -84,6 +86,7 @@ def create_alert(
         notes=notes,
         frame_file=frame_file,
         clip_file=clip_file,
+        raw_clip_file=raw_clip_file,
         roi_clip_file=roi_clip_file,
         event_file=event_file,
     )
@@ -177,11 +180,19 @@ def verify_existing_alert(
     if not alert:
         raise HTTPException(status_code=404, detail="Alert not found")
 
-    # Ưu tiên dùng roi_clip_path (frame gốc crop ROI, không có overlay)
-    # Fallback về clip_path nếu chưa có roi_clip
-    verify_clip = alert.roi_clip_path or alert.clip_path
+    # Ưu tiên: raw_clip (full frame, không overlay) > roi_clip (crop ROI) > clip (có overlay)
+    verify_clip = alert.raw_clip_path or alert.roi_clip_path or alert.clip_path
     if not verify_clip:
         raise HTTPException(status_code=400, detail="Alert has no clip_path to verify")
+
+    import logging
+    logging.getLogger("api_routes").info(
+        f"[SlowFast VERIFY] alert_id={alert_id} | "
+        f"raw_clip={alert.raw_clip_path} | "
+        f"roi_clip={alert.roi_clip_path} | "
+        f"rendered_clip={alert.clip_path} | "
+        f"SELECTED={verify_clip}"
+    )
 
     clip_path = Path(verify_clip)
     if not clip_path.exists():

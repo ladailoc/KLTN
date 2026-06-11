@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Iterable, Tuple
+from typing import Dict, Tuple
 import cv2
 
 from app.common.types import AlertEvent, Detection, PoseResult
@@ -7,7 +7,7 @@ from app.common.types import AlertEvent, Detection, PoseResult
 # ── Overlay style constants ──────────────────────────────────────────
 BBOX_THICKNESS = 1
 LABEL_FONT = cv2.FONT_HERSHEY_SIMPLEX
-LABEL_FONT_SCALE = 0.4
+LABEL_FONT_SCALE = 0.5
 LABEL_TEXT_THICKNESS = 1
 LABEL_PADDING_X = 3
 LABEL_PADDING_Y = 2
@@ -18,6 +18,14 @@ SMALL_BBOX_HEIGHT = 50
 
 # Ngưỡng IoU để bỏ qua bbox trùng
 IOU_DEDUP_THRESHOLD = 0.45
+
+# Frame-based alert hold — per-class (phải khớp với pipeline)
+ALERT_HOLD_FRAMES: dict = {
+    "smoking": 45,
+    "no_seatbelt": 60,
+    "using_phone": 45,
+}
+ALERT_HOLD_FRAMES_DEFAULT = 45
 
 # Màu sắc cho từng loại vi phạm (BGR)
 ALERT_COLORS = {
@@ -55,34 +63,6 @@ def _bbox_size(bbox: Tuple[int, int, int, int]) -> Tuple[int, int]:
     return bbox[2] - bbox[0], bbox[3] - bbox[1]
 
 
-def _deduplicate_alerts(alerts: list[AlertEvent]) -> list[AlertEvent]:
-    """
-    Loại bỏ alert trùng: cùng event_type và bbox IoU > ngưỡng.
-    Giữ lại alert có confidence cao nhất cho mỗi cụm trùng.
-    """
-    clusters: list[list[AlertEvent]] = []
-
-    for alert in alerts:
-        if not alert.bbox or len(alert.bbox) != 4:
-            continue
-        box = tuple(int(v) for v in alert.bbox)
-
-        merged = False
-        for cluster in clusters:
-            rep = cluster[0]
-            rep_box = tuple(int(v) for v in rep.bbox)
-            if alert.event_type == rep.event_type and _iou(box, rep_box) > IOU_DEDUP_THRESHOLD:
-                cluster.append(alert)
-                merged = True
-                break
-
-        if not merged:
-            clusters.append([alert])
-
-    # Lấy alert có confidence cao nhất từ mỗi cluster
-    return [max(c, key=lambda a: a.confidence) for c in clusters]
-
-
 def _draw_bbox_label(frame, x1: int, y1: int, x2: int, y2: int,
                      label: str, color: tuple) -> None:
     """Vẻ bbox mỏng + label compact trên frame."""
@@ -112,19 +92,23 @@ def _draw_bbox_label(frame, x1: int, y1: int, x2: int, y2: int,
 
 class OverlayRenderer:
     def draw(self, frame, detections: list[Detection], pose: PoseResult,
-             alerts: Iterable[AlertEvent], fps: float):
+             active_alerts: Dict[str, dict], fps: float, frame_index: int = 0):
         out = frame.copy()
-        alerts = list(alerts)  # materialize để duyệt nhiều lần
 
-        # ── 1. Deduplicate alerts (giữ confidence cao nhất) ──
-        deduped_alerts = _deduplicate_alerts(alerts)
+        # Lọc alert còn hạn theo frame — TTL per class
+        valid_alerts: list[AlertEvent] = []
+        for etype, entry in active_alerts.items():
+            hold = ALERT_HOLD_FRAMES.get(etype, ALERT_HOLD_FRAMES_DEFAULT)
+            if frame_index - entry["last_seen_frame"] <= hold:
+                valid_alerts.append(entry["alert"])
 
-        # Thu thập bbox từ deduped alerts
+        # Thu thập bbox từ alerts
         alert_bboxes: list[tuple[int, int, int, int]] = []
-        for alert in deduped_alerts:
-            alert_bboxes.append(tuple(int(v) for v in alert.bbox))
+        for alert in valid_alerts:
+            if alert.bbox and len(alert.bbox) == 4:
+                alert_bboxes.append(tuple(int(v) for v in alert.bbox))
 
-        # ── 2. Vẽ detection bbox (xanh lá) — bỏ qua nếu trùng alert ──
+        # ── 1. Vẽ detection bbox (xanh lá) — bỏ qua nếu trùng alert ──
         for det in detections:
             dx1, dy1, dx2, dy2 = det.bbox
             det_box = (dx1, dy1, dx2, dy2)
@@ -149,16 +133,19 @@ class OverlayRenderer:
                         (dx1 + LABEL_PADDING_X, dy1 - LABEL_PADDING_Y - baseline),
                         LABEL_FONT, LABEL_FONT_SCALE, (255, 255, 255), LABEL_TEXT_THICKNESS)
 
-        # ── 3. Vẽ pose keypoints ──
+        # ── 2. Vẽ pose keypoints ──
         for name, (x, y) in pose.points.items():
             cv2.circle(out, (x, y), 2, (255, 0, 0), -1)
             cv2.putText(out, name, (x + 3, y - 3), LABEL_FONT, 0.25, (255, 0, 0), 1)
 
-        # ── 4. Vẽ alert bbox (vi phạm) — chỉ từ deduped list ──
+        # ── 3. Vẽ alert bbox (vi phạm) — chỉ từ valid_alerts ──
         drawn_alert_types: set[str] = set()
         drawn_alert_bboxes: list[tuple[int, int, int, int]] = []
 
-        for alert in deduped_alerts:
+        for alert in valid_alerts:
+            if not alert.bbox or len(alert.bbox) != 4:
+                continue
+
             x1, y1, x2, y2 = [int(v) for v in alert.bbox]
             alert_box = (x1, y1, x2, y2)
 
@@ -171,10 +158,8 @@ class OverlayRenderer:
 
             # Chọn label dựa trên kích thước bbox
             if bw < SMALL_BBOX_WIDTH or bh < SMALL_BBOX_HEIGHT:
-                # Bbox nhỏ → label compact: "smoking 0.91"
                 label = f"{alert.event_type} {alert.confidence:.2f}"
             else:
-                # Bbox lớn → label tiếng Việt: "HUT THUOC 91%"
                 vi_text = ALERT_LABELS_VI.get(alert.event_type, alert.event_type.upper())
                 label = f"{vi_text} {alert.confidence:.0%}"
 
@@ -183,15 +168,15 @@ class OverlayRenderer:
             drawn_alert_types.add(alert.event_type)
             drawn_alert_bboxes.append(alert_box)
 
-        # ── 5. HUD: FPS ──
+        # ── 4. HUD: FPS ──
         y0 = 18
         fps_text = f"FPS: {fps:.1f}" if fps is not None else "FPS: --"
         cv2.putText(out, fps_text, (6, y0), LABEL_FONT, 0.4, (0, 255, 255), 1)
 
-        # ── 6. HUD: Alert list — tối đa 1 dòng mỗi loại ──
+        # ── 5. HUD: Alert list — tối đa 1 dòng mỗi loại ──
         y = y0 + 14
         seen_types: set[str] = set()
-        for alert in deduped_alerts:
+        for alert in valid_alerts:
             if alert.event_type in seen_types:
                 continue
             seen_types.add(alert.event_type)

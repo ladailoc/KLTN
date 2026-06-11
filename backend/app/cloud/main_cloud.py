@@ -41,6 +41,23 @@ app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 def on_startup():
     Base.metadata.create_all(bind=engine)
 
+    # ── Migration: thêm raw_clip_path nếu chưa có (SQLite) ──
+    import logging
+    from sqlalchemy import text
+    logger = logging.getLogger("startup_migration")
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(text("PRAGMA table_info(alerts)"))
+            columns = {row[1] for row in result}
+            if "raw_clip_path" not in columns:
+                conn.execute(text("ALTER TABLE alerts ADD COLUMN raw_clip_path VARCHAR(255)"))
+                conn.commit()
+                logger.info("Migration: added raw_clip_path column to alerts table")
+            else:
+                logger.debug("raw_clip_path column already exists")
+    except Exception as e:
+        logger.warning(f"Migration check failed (may be first run): {e}")
+
 
 @app.get("/", include_in_schema=False)
 def root():

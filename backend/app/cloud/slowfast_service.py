@@ -301,6 +301,7 @@ class SlowFastService:
         event_type_hint: Optional[str] = None,
     ) -> Dict[str, Any]:
         self._ensure_loaded()
+        self.log.info(f"[SlowFast] Verifying clip: {video_path} | hint={event_type_hint}")
 
         num_frames = int(self.sf_cfg.get("num_frames", 32))
         sampling_rate = int(self.sf_cfg.get("sampling_rate", 2))

@@ -14,7 +14,7 @@ edge:
   send_to_cloud: true
   server_url: "http://127.0.0.1:8000"
   source_device: "edge-01"
-  buffer_size: 150
+  buffer_size: 64
   alert_cooldown_sec: 4
   show_window: true
   resize_width: 640

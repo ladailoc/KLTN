@@ -49,6 +49,7 @@ def create_alert(
     notes: str | None,
     frame_path: str | None,
     clip_path: str | None,
+    raw_clip_path: str | None = None,
     roi_clip_path: str | None = None,
     event_json_path: str | None,
 ) -> AlertModel:
@@ -61,6 +62,7 @@ def create_alert(
         notes=notes,
         frame_path=frame_path,
         clip_path=clip_path,
+        raw_clip_path=raw_clip_path,
         roi_clip_path=roi_clip_path,
         event_json_path=event_json_path,
     )

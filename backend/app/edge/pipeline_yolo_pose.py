@@ -1,14 +1,14 @@
 from __future__ import annotations
 import time
-from collections import deque
 from pathlib import Path
+from typing import Dict, List
 import json
 import psutil
 import cv2
 from app.common.config import load_config
 from app.common.logger import get_logger
 from app.common.utils import ensure_dir, now_iso
-from app.common.types import PoseResult
+from app.common.types import Detection, PoseResult
 from app.edge.alert_manager import AlertManager
 from app.edge.behavior_rules import BehaviorRules
 from app.edge.edge_api_client import EdgeApiClient
@@ -17,6 +17,18 @@ from app.edge.overlay_renderer import OverlayRenderer
 from app.edge.pose_estimator import PoseEstimator
 from app.edge.video_source import VideoSource
 from app.edge.yolo_detector import YoloDetector
+
+# ── Frame-based bbox/alert hold constants ─────────────────────────
+BBOX_HOLD_FRAMES = 2              # Giữ bbox tối đa 2 frame sau khi mất detection
+SMOKE_DEBOUNCE_FRAMES = 2         # Cần thấy smoking >= 2 frame liên tục mới hiện bbox
+
+# Alert text hold — MỖI CLASS có TTL riêng (rất khác bbox)
+ALERT_HOLD_FRAMES: dict = {
+    "smoking": 45,                # ~2.2 giây @ 20 FPS
+    "no_seatbelt": 60,            # ~3 giây @ 20 FPS (trạng thái liên tục, giữ lâu hơn)
+    "using_phone": 45,            # ~2.2 giây @ 20 FPS
+}
+ALERT_HOLD_FRAMES_DEFAULT = 45    # fallback nếu event_type lạ
 
 class EdgePipeline:
     def __init__(self, config_path: str = "config.yaml"):
@@ -95,6 +107,125 @@ class EdgePipeline:
 
         return self.last_pose
 
+    # ── Frame-based bbox cache ────────────────────────────────────────
+
+    def _update_bbox_cache(self, detections: List[Detection], frame_index: int) -> None:
+        """Cập nhật bbox_cache từ detections hiện tại.
+        Match theo class_name + IoU để cập nhật entry cũ, thêm entry mới nếu không match.
+        """
+        matched_indices: set = set()
+
+        # Cập nhật entry có sẵn trong cache
+        for cache_key, entry in self.bbox_cache.items():
+            best_match = None
+            best_iou = 0.0
+            best_idx = -1
+
+            for i, det in enumerate(detections):
+                if i in matched_indices:
+                    continue
+                if det.class_name != entry["class_name"]:
+                    continue
+                iou_val = self._iou(entry["bbox"], det.bbox)
+                if iou_val > best_iou:
+                    best_iou = iou_val
+                    best_match = det
+                    best_idx = i
+
+            if best_match is not None and best_iou > 0.3:
+                self.bbox_cache[cache_key] = {
+                    "class_name": best_match.class_name,
+                    "bbox": best_match.bbox,
+                    "confidence": best_match.confidence,
+                    "last_seen_frame": frame_index,
+                }
+                matched_indices.add(best_idx)
+
+        # Xóa entry cũ (quá hạn BBOX_HOLD_FRAMES)
+        expired_keys = [
+            k for k, v in self.bbox_cache.items()
+            if frame_index - v["last_seen_frame"] > BBOX_HOLD_FRAMES
+        ]
+        for k in expired_keys:
+            del self.bbox_cache[k]
+
+        # Thêm detection mới (chưa match) vào cache
+        for i, det in enumerate(detections):
+            if i not in matched_indices:
+                new_key = f"{det.class_name}_{frame_index}_{i}"
+                self.bbox_cache[new_key] = {
+                    "class_name": det.class_name,
+                    "bbox": det.bbox,
+                    "confidence": det.confidence,
+                    "last_seen_frame": frame_index,
+                }
+
+    def _update_active_alerts(self, alerts, frame_index: int) -> None:
+        """Cập nhật active_alerts: giữ 1 alert per event_type.
+        Mỗi class có TTL riêng (ALERT_HOLD_FRAMES dict).
+        """
+        for alert in alerts:
+            self.active_alerts[alert.event_type] = {
+                "alert": alert,
+                "last_seen_frame": frame_index,
+            }
+
+        # Xóa alert cũ — TTL per class
+        expired_types = [
+            etype for etype, entry in self.active_alerts.items()
+            if frame_index - entry["last_seen_frame"] > ALERT_HOLD_FRAMES.get(etype, ALERT_HOLD_FRAMES_DEFAULT)
+        ]
+        for etype in expired_types:
+            del self.active_alerts[etype]
+
+    def _get_detections_for_render(self, frame_index: int) -> List[Detection]:
+        """Lấy danh sách detection để render từ bbox_cache.
+        Chỉ trả về entry còn hạn (trong BBOX_HOLD_FRAMES).
+        Áp dụng debounce cho smoking: cần >= SMOKE_DEBOUNCE_FRAMES frame liên tục.
+        """
+        result: List[Detection] = []
+        smoking_in_frame = False
+
+        for entry in self.bbox_cache.values():
+            if frame_index - entry["last_seen_frame"] > BBOX_HOLD_FRAMES:
+                continue
+
+            # Smoking debounce: đếm số frame liên tục có smoking
+            if entry["class_name"] == "smoking":
+                smoking_in_frame = True
+
+            result.append(Detection(
+                class_id=0,
+                class_name=entry["class_name"],
+                confidence=entry["confidence"],
+                bbox=entry["bbox"],
+            ))
+
+        # Cập nhật smoking debounce counter
+        if smoking_in_frame:
+            self.smoking_frame_count += 1
+        else:
+            self.smoking_frame_count = 0
+
+        # Lọc smoking: chỉ hiện bbox nếu đủ frame liên tục
+        if self.smoking_frame_count < SMOKE_DEBOUNCE_FRAMES:
+            result = [d for d in result if d.class_name != "smoking"]
+
+        return result
+
+    @staticmethod
+    def _iou(a, b) -> float:
+        """Tính IoU giữa 2 bbox (x1, y1, x2, y2)."""
+        ax1, ay1, ax2, ay2 = a
+        bx1, by1, bx2, by2 = b
+        ix1, iy1 = max(ax1, bx1), max(ay1, by1)
+        ix2, iy2 = min(ax2, bx2), min(ay2, by2)
+        inter = max(0, ix2 - ix1) * max(0, iy2 - iy1)
+        area_a = max(0, ax2 - ax1) * max(0, ay2 - ay1)
+        area_b = max(0, bx2 - bx1) * max(0, by2 - by1)
+        union = area_a + area_b - inter
+        return inter / union if union > 0 else 0.0
+
     def run(self, source_override: str | None = None, send_to_cloud_override: bool | None = None) -> None:
         source = source_override or self.cfg["edge"]["source"]
         send_to_cloud = (
@@ -127,7 +258,9 @@ class EdgePipeline:
             )
 
         frame_index = 0
-        recent_alerts = deque(maxlen=4)
+        self.bbox_cache: Dict[str, dict] = {}      # frame-based bbox cache
+        self.active_alerts: Dict[str, dict] = {}    # frame-based alert cache
+        self.smoking_frame_count = 0                 # smoking debounce counter
         fps_smooth = None
 
         fps_values = []
@@ -144,7 +277,12 @@ class EdgePipeline:
 
         try:
             while True:
-                ok, frame = video.read()
+                try:
+                    ok, frame = video.read()
+                except SystemError:
+                    # OpenCV đôi khi throw SystemError ở frame cuối khi hết bộ nhớ
+                    self.logger.warning("Video read SystemError — assuming end of stream")
+                    break
                 if not ok:
                     break
 
@@ -159,6 +297,9 @@ class EdgePipeline:
                 else:
                     detections = last_detections
 
+                # Cập nhật bbox_cache theo frame (không dùng time.time())
+                self._update_bbox_cache(detections, frame_index)
+
                 pose = self._get_pose_for_frame(frame, frame_index, detections)
 
                 candidates = self.rules.infer(detections, pose, frame.shape)
@@ -171,16 +312,22 @@ class EdgePipeline:
                     source_device=self.cfg["edge"]["source_device"],
                 )
 
-                # Thêm alert mới vào danh sách gần nhất TRƯỚC khi render
+                # Cập nhật active_alerts theo frame
+                self._update_active_alerts(alerts, frame_index)
                 for alert in alerts:
                     total_alert_count += 1
-                    recent_alerts.appendleft(alert)
 
                 # Lưu frame GỐC (không overlay) cho SlowFast verification
                 self.evidence_writer.push_original_frame(frame)
 
+                # Lấy detections từ cache (đã lọc theo frame + smoking debounce)
+                render_detections = self._get_detections_for_render(frame_index)
+
                 # Render frame với overlay (bbox khoanh vùng vi phạm)
-                rendered = self.renderer.draw(frame, detections, pose, recent_alerts, fps_smooth)
+                rendered = self.renderer.draw(
+                    frame, render_detections, pose,
+                    self.active_alerts, fps_smooth, frame_index,
+                )
 
                 # Đẩy frame ĐÃ RENDER vào evidence buffer (có khoanh vùng)
                 self.evidence_writer.push_frame(rendered)
@@ -190,6 +337,16 @@ class EdgePipeline:
                     saved = self.evidence_writer.persist_alert(alert, fps=src_fps)
                     self.logger.info(
                         f"ALERT fired: {alert.event_type} | frame={alert.frame_index} | saved={saved}"
+                    )
+
+                    # ── Diagnostic log: xác nhận frame separation ──
+                    self.logger.info(
+                        f"[FRAME FLOW] "
+                        f"raw_buffer={len(self.evidence_writer.original_frame_buffer)} | "
+                        f"render_buffer={len(self.evidence_writer.frame_buffer)} | "
+                        f"slowfast_input={saved.get('raw_clip_path', 'N/A')} | "
+                        f"roi_clip={saved.get('roi_clip_path', 'N/A')} | "
+                        f"evidence_clip={saved.get('clip_path', 'N/A')}"
                     )
 
                     if send_to_cloud:
@@ -212,6 +369,10 @@ class EdgePipeline:
 
                         except Exception as e:
                             self.logger.error(f"Cloud upload/verify failed: {e}")
+
+                # Giải phóng buffer sau khi đã persist & upload xong — tránh OOM
+                if alerts:
+                    self.evidence_writer.clear_buffers()
 
                 fps_now = 1.0 / max(time.time() - t0, 1e-6)
                 if fps_smooth is None:
