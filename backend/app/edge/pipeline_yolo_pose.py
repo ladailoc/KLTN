@@ -17,6 +17,7 @@ from app.edge.overlay_renderer import OverlayRenderer
 from app.edge.pose_estimator import PoseEstimator
 from app.edge.video_source import VideoSource
 from app.edge.yolo_detector import YoloDetector
+from app.edge.upload_queue import UploadQueue
 
 # ── Frame-based bbox/alert hold constants ─────────────────────────
 BBOX_HOLD_FRAMES = 2              # Giữ bbox tối đa 2 frame sau khi mất detection
@@ -63,6 +64,13 @@ class EdgePipeline:
             server_url=self.cfg["edge"]["server_url"],
             timeout_sec=self.cfg["cloud"]["upload_timeout_sec"],
             verify_timeout_sec=self.cfg["edge"].get("verify_timeout_sec", 120),
+        )
+
+        queue_path = str(Path(self.cfg["storage"]["alerts_dir"]) / "upload_queue.json")
+        self.upload_queue = UploadQueue(
+            queue_path=queue_path,
+            api_client=self.api_client,
+            edge_logger=self.logger,
         )
 
         self.last_pose = PoseResult(points={})
@@ -317,6 +325,11 @@ class EdgePipeline:
                 for alert in alerts:
                     total_alert_count += 1
 
+                # Flush upload queue — retry các alert chưa upload được trước đó
+                if send_to_cloud:
+                    verify_on_cloud = self.cfg["edge"].get("verify_on_cloud", False)
+                    self.upload_queue.flush(verify=verify_on_cloud)
+
                 # Lưu frame GỐC (không overlay) cho SlowFast verification
                 self.evidence_writer.push_original_frame(frame)
 
@@ -369,6 +382,19 @@ class EdgePipeline:
 
                         except Exception as e:
                             self.logger.error(f"Cloud upload/verify failed: {e}")
+                            # Thêm vào hàng đợi để retry khi có mạng
+                            self.upload_queue.enqueue(
+                                alert_dict={
+                                    "event_type": alert.event_type,
+                                    "confidence": alert.confidence,
+                                    "frame_index": alert.frame_index,
+                                    "timestamp": alert.timestamp,
+                                    "source_device": alert.source_device,
+                                    "note": alert.note,
+                                },
+                                saved_paths=saved,
+                                error=str(e),
+                            )
 
                 # Giải phóng buffer sau khi đã persist & upload xong — tránh OOM
                 if alerts:
